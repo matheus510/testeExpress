@@ -3,10 +3,14 @@ let express = require('express')
 let app = express()
 
 let dataGather = require('./middleware/dataGather')
-let dataVerify = require('./middleware/dataVerify')
 let bookBuild = require('./middleware/bookBuild')
+
+// setting auth for all requests
+axios.defaults.headers.common['Authorization'] = 'Basic YmFyYmFhOmJhcmJhYQ=='
+
 app.use(dataGather)
-app.use(dataVerify)
+app.use(bookBuild)
+
 app.get('/', function (req, res) {
   res.send()
 })
