@@ -10,21 +10,6 @@ module.exports = function(options) {
     next()
   }
 }
-/*
-getDadosMvc
-criptografia
-getIdProduto
-getUltimaVersao
-getConteudo
-getFontesRestritas
-getDados
-urlPdf
-urlBookImpressos
-urlBookWeb
-urlVisualizacao
-urlApi
-urlPage
-*/
 
 function getInfo(idBook) {
   this.config = {
@@ -58,9 +43,9 @@ function getDados () {
     return response.data
   })
   .catch(function (error) {
-    $log.error('Erro ao carregar dados do Book.');
-    throw error;
-  });
+    $log.error('Erro ao carregar dados do Book.')
+    throw error
+  })
 }
 
 function getConteudo () {
@@ -77,11 +62,42 @@ function getConteudo () {
     return response.data
   })
   .catch(function (error) {
-    $log.error('Erro ao carregar dados do Book.');
-    throw error;
-  });
+    $log.error('Erro ao carregar dados do Book.')
+    throw error
+  })
 }
 
 function getUltimaVersao () {
-  
+  axios.get(this.config.urlApi + '/api/BookVersao/GetIdUltimaVersaoDoBook', {
+    idBook: this.config.idBook 
+  })
+  .then(function (response) {
+    return response.data
+  })
+  .catch(function (error) {
+    $log.error('Erro ao carregar Última versão do Book.')
+    throw error
+  })  
+}
+
+function getIdProduto () {
+  axios.get(this.config.urlApi + '/api/ProdutoMvc/GetIdProduto/' + this.config.idProdutoMvc)
+  .then(function (response) {
+    return response.data
+  })
+  .catch(function (error) {
+    $log.error('Erro ao carregar o Id do produto')
+    throw error
+  })  
+}
+
+function getDadosMvc () {
+  axios.get(this.config.urlApi + '/api/ProdutoMvc/GetPropriedadesMvc?id=' + this.config.idProdutoMvc)
+  .then(function (response) {
+    return response.data
+  })
+  .catch(function (error) {
+    $log.error('Erro ao carregar dados da MVCs.')
+    throw error
+  })  
 }
