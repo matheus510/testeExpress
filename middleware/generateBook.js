@@ -6,6 +6,7 @@ axios.defaults.headers.common['Authorization'] = 'Basic YmFyYmFhOmJhcmJhYQ=='
 module.exports = function(options) {
   return function(req, res, next) {
     console.log(req.params.idBook);
+    //buildHtmlhere
     next()
   }
 }
