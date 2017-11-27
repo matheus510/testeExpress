@@ -3,7 +3,7 @@ axios.defaults.headers.common['Authorization'] = 'Basic YmFyYmFhOmJhcmJhYQ=='
 
 module.exports = function(options) {
   return function(req, res, next) {
-    req.dados = {
+    res.locals.dados = {
       'versao': '',
       'authorization': {'Authorization': 'Basic YmFyYmFhOmJhcmJhYQ=='},
       'idBook': req.params.idBook,
