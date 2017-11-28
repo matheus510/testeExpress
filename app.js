@@ -11,11 +11,11 @@ const bookBuild = require('./middleware/bookBuild.js')
 axios.defaults.headers.common['Authorization'] = 'Basic YmFyYmFhOmJhcmJhYQ=='
 
 //applying global middlewares
-app.use(cors)
-app.use(dataGather)
+//app.use(cors)
+//app.use(dataGather)
 
-app.get('/:idBook', dataGather, function (req, res) {
-  res.send('pa')
+app.get('/:idBook', function (req, res) {
+  res.send('hey')
 })
 
 /* function sendIndexPage (req, res) {
