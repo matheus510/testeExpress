@@ -1,40 +1,41 @@
-module.exports = {
-  dataGather: function(req, res, next) {
-    res.locals.config = {
-      'versao': '',
-      'authorization': {'Authorization': 'Basic YmFyYmFhOmJhcmJhYQ=='},
-      'idBook': req.params.idBook,
-      'idBookVersao': '',
-      'automatic': 'true',
-      'urlApi': 'http://cloud.boxnet.com.br',
-      'urlBookWeb': 'http://bookweb.boxnet.com.br',
-      'urlBookImpressos': 'http://bookimpressos.boxnet.com.br',
-      'urlPage': 'http://book1.boxnet.com.br',
-      'urlVis': 'http://visualizacao.boxnet.com.br/#',
-      'urlPdf': 'http://pdf.boxnet.com.br'
-    }
-    res.locals.dados = getDados()
-    res.locals.conteudo = getConteudo()
-    res.locals.ultimaVersao = getUltimaVersao()
-    res.locals.idProduto = getIdProduto()
-    res.locals.dadosMvc = getDadosMvc()
-    res.locals.fontesRestritas = getFontesRestritas()
-    next()
+module.exports = function(req, res, next) {
+  res.locals.config = {
+    'versao': '',
+    'authorization': {'Authorization': 'Basic YmFyYmFhOmJhcmJhYQ=='},
+    'idBook': req.params.idBook,
+    'idBookVersao': '',
+    'automatic': 'true',
+    'urlApi': 'http://cloud.boxnet.com.br',
+    'urlBookWeb': 'http://bookweb.boxnet.com.br',
+    'urlBookImpressos': 'http://bookimpressos.boxnet.com.br',
+    'urlPage': 'http://book1.boxnet.com.br',
+    'urlVis': 'http://visualizacao.boxnet.com.br/#',
+    'urlPdf': 'http://pdf.boxnet.com.br'
   }
+  res.locals.dados = getDados(res)
+  res.locals.conteudo = getConteudo(res)
+  res.locals.ultimaVersao = getUltimaVersao(res)
+  res.locals.idProduto = getIdProduto(res)
+  res.locals.dadosMvc = getDadosMvc(res)
+  res.locals.fontesRestritas = getFontesRestritas(res)
+  next()
 }
 
-function getDados () {
+const axios = require('axios')
+
+
+function getDados (res) {
   axios.get(res.locals.urlApi + '/api/Book/Get/' + res.locals.idBook)
   .then(function (response) {
     return response.data
   })
   .catch(function (error) {
-    $log.error('Erro ao carregar dados do Book.')
+    console.error('Erro ao carregar dados do Book.')
     throw error
   })
 }
 
-function getConteudo () {
+function getConteudo (res) {
   axios.get(res.locals.urlApi + '/api/Book/Get/' + res.locals.idBook,
       {
         params: {
@@ -48,12 +49,12 @@ function getConteudo () {
     return response.data
   })
   .catch(function (error) {
-    $log.error('Erro ao carregar dados do Book.')
+    console.error('Erro ao carregar dados do Book.')
     throw error
   })
 }
 
-function getUltimaVersao () {
+function getUltimaVersao (res) {
   axios.get(res.locals.urlApi + '/api/BookVersao/GetIdUltimaVersaoDoBook', {
     idBook: res.locals.idBook 
   })
@@ -61,29 +62,40 @@ function getUltimaVersao () {
     return response.data
   })
   .catch(function (error) {
-    $log.error('Erro ao carregar Última versão do Book.')
+    console.error('Erro ao carregar Última versão do Book.')
     throw error
   })  
 }
 
-function getIdProduto () {
+function getIdProduto (res) {
   axios.get(res.locals.urlApi + '/api/ProdutoMvc/GetIdProduto/' + res.locals.idProdutoMvc)
   .then(function (response) {
     return response.data
   })
   .catch(function (error) {
-    $log.error('Erro ao carregar o Id do produto')
+    console.error('Erro ao carregar o Id do produto')
     throw error
   })  
 }
 
-function getDadosMvc () {
+function getDadosMvc (res) {
   axios.get(res.locals.urlApi + '/api/ProdutoMvc/GetPropriedadesMvc?id=' + res.locals.idProdutoMvc)
   .then(function (response) {
     return response.data
   })
   .catch(function (error) {
-    $log.error('Erro ao carregar dados da MVCs.')
+    console.error('Erro ao carregar dados da MVCs.')
+    throw error
+  })  
+}
+
+function getFontesRestritas (res) {
+  axios.get(res.locals.urlApi + '/api/FonteRestricaoExibicao/CacheFontesRestritas/')
+  .then(function (response) {
+    return response.data
+  })
+  .catch(function (error) {
+    console.error('Erro ao carregar fontes restritas.')
     throw error
   })  
 }

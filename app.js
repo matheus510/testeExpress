@@ -1,18 +1,21 @@
-let axios = require('axios')
-let express = require('express')
-let app = express()
-
-let dataGather = require('./middleware/dataGather')
-let bookBuild = require('./middleware/bookBuild')
+const express = require('express')
+const app = express()
+// major dependency
+const cors = require('cors')
+const axios = require('axios')
+//middlewares
+const dataGather = require('./middleware/dataGather.js')
+const bookBuild = require('./middleware/bookBuild.js')
 
 // setting auth for all requests
 axios.defaults.headers.common['Authorization'] = 'Basic YmFyYmFhOmJhcmJhYQ=='
 
+//applying global middlewares
+app.use(cors)
 app.use(dataGather)
-app.use(bookBuild)
 
-app.get('/', function (req, res) {
-  res.send()
+app.get('/:idBook', dataGather, function (req, res) {
+  res.send('pa')
 })
 
 /* function sendIndexPage (req, res) {
@@ -24,5 +27,7 @@ function sendAboutPage (req, res) {
 app.get('/x', sendIndexPage)
 app.get('/about', sendAboutPage)
  */
+app.listen(3000, () => console.log('Example app listening on port 3000!'))
+
 
 module.exports = app
