@@ -3,6 +3,7 @@ const app = express()
 // major dependency
 const cors = require('cors')
 const axios = require('axios')
+const co = require('co')
 //middlewares
 const dataGather = require('./middleware/dataGather.js')
 const bookBuild = require('./middleware/bookBuild.js')

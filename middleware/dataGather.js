@@ -1,5 +1,7 @@
+const axios = require('axios')
+const co = require('co')
+
 module.exports = function(req, res, next) {
-    console.log('entrou middleware')
     res.config = {
       'versao': '',
       'authorization': {'Authorization': 'Basic YmFyYmFhOmJhcmJhYQ=='},
@@ -13,22 +15,36 @@ module.exports = function(req, res, next) {
       'urlVis': 'http://visualizacao.boxnet.com.br/#',
       'urlPdf': 'http://pdf.boxnet.com.br'
     }
-    res.dados = getDados(res)
-    res.conteudo = getConteudo(res)
-    res.ultimaVersao = getUltimaVersao(res)
-    res.idProduto = getIdProduto(res)
-    res.dadosMvc = getDadosMvc(res)
-    res.fontesRestritas = getFontesRestritas(res)
+    co(function *() {
+      const dados = yield getDados(res)
+      const conteudo = yield getConteudo(res)
+      const ultimaVersao = yield getUltimaVersao(res)
+      const idProduto = yield getIdProduto(res)
+      const dadosMvc = yield getDadosMvc(res)
+      const fontesRestritas = yield getFontesRestritas(res)
+
+      res.dados = dados
+      res.conteudo = conteudo
+      res.ultimaVersao = ultimaVersao
+      res.idProduto = idProduto
+      res.dadosMvc = dadosMvc
+      res.fontesRestritas = fontesRestritas
+
+    })
     next()
   }
 
-const axios = require('axios')
-
-
 function getDados (res) {
-  axios.get(res.config.urlApi + '/api/Book/Get/' + res.config.idBook)
+  return axios.get(res.config.urlApi + '/api/Book/Get/' + res.config.idBook)
   .then(function (response) {
-    console.log(response.data)
+    //como fazer isso funcionar?
+    //quero pedir todas as infos da api em ORDEM.
+    //promises looks like the right way to do it
+    //but are they really? maybe callbacks could help...
+    //fuck synchronous programming, i want promises, not callbacks
+    res.config.idProdutoMvc = response.data.Template.idProdutoMvc
+    res.config.aberto = (response.data.Template.Opcoes['Modelo Conteúdo Aberto Texto'] || response.data.Template.Opcoes['Modelo Conteúdo Aberto Mesclado']) ? true : false;
+    res.config.mesclado = (response.data.Template.Opcoes['Modelo Conteúdo Aberto Mesclado']) ? true : false;    
     return response.data
   })
   .catch(function (error) {
@@ -38,7 +54,7 @@ function getDados (res) {
 }
 
 function getConteudo (res) {
-  axios.get(res.config.urlApi + '/api/Book/Get/' + res.config.idBook,
+  return axios.get(res.config.urlApi + '/api/Book/Get/' + res.config.idBook,
       {
         params: {
           idBook: res.config.idBook,
@@ -48,7 +64,7 @@ function getConteudo (res) {
         }
       })
   .then(function (response) {
-    console.log(response.data)
+
     return response.data
   })
   .catch(function (error) {
@@ -58,11 +74,13 @@ function getConteudo (res) {
 }
 
 function getUltimaVersao (res) {
-  axios.get(res.config.urlApi + '/api/BookVersao/GetIdUltimaVersaoDoBook', {
-    idBook: res.config.idBook 
-  })
+  return axios.get(res.config.urlApi + '/api/BookVersao/GetIdUltimaVersaoDoBook', {
+    params: {
+      idBook: res.config.idBook 
+    }
+    })
   .then(function (response) {
-    console.log(response.data)
+
     return response.data
   })
   .catch(function (error) {
@@ -72,9 +90,9 @@ function getUltimaVersao (res) {
 }
 
 function getIdProduto (res) {
-  axios.get(res.config.urlApi + '/api/ProdutoMvc/GetIdProduto/' + res.config.idProdutoMvc)
+  return axios.get(res.config.urlApi + '/api/ProdutoMvc/GetIdProduto/' + res.config.idProdutoMvc)
   .then(function (response) {
-    console.log(response.data)
+
     return response.data
   })
   .catch(function (error) {
@@ -84,9 +102,9 @@ function getIdProduto (res) {
 }
 
 function getDadosMvc (res) {
-  axios.get(res.config.urlApi + '/api/ProdutoMvc/GetPropriedadesMvc?id=' + res.config.idProdutoMvc)
+  return axios.get(res.config.urlApi + '/api/ProdutoMvc/GetPropriedadesMvc?id=' + res.config.idProdutoMvc)
   .then(function (response) {
-    console.log(response.data)
+
     return response.data
   })
   .catch(function (error) {
@@ -96,9 +114,9 @@ function getDadosMvc (res) {
 }
 
 function getFontesRestritas (res) {
-  axios.get(res.config.urlApi + '/api/FonteRestricaoExibicao/CacheFontesRestritas/')
+  return axios.get(res.config.urlApi + '/api/FonteRestricaoExibicao/CacheFontesRestritas/')
   .then(function (response) {
-    console.log(response.data)
+
     return response.data
   })
   .catch(function (error) {
