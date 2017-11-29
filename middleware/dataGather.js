@@ -1,9 +1,9 @@
-module.exports = function (options) {
-  return function(req, res, next) {
+module.exports = function(req, res, next) {
+    console.log('entrou middleware')
     res.config = {
       'versao': '',
       'authorization': {'Authorization': 'Basic YmFyYmFhOmJhcmJhYQ=='},
-      'idBook': idBook,
+      'idBook': req.params.id,
       'idBookVersao': '',
       'automatic': 'true',
       'urlApi': 'http://cloud.boxnet.com.br',
@@ -19,16 +19,16 @@ module.exports = function (options) {
     res.idProduto = getIdProduto(res)
     res.dadosMvc = getDadosMvc(res)
     res.fontesRestritas = getFontesRestritas(res)
+    next()
   }
-  next()
-}
 
 const axios = require('axios')
 
 
 function getDados (res) {
-  axios.get(res.urlApi + '/api/Book/Get/' + res.idBook)
+  axios.get(res.config.urlApi + '/api/Book/Get/' + res.config.idBook)
   .then(function (response) {
+    console.log(response.data)
     return response.data
   })
   .catch(function (error) {
@@ -38,16 +38,17 @@ function getDados (res) {
 }
 
 function getConteudo (res) {
-  axios.get(res.urlApi + '/api/Book/Get/' + res.idBook,
+  axios.get(res.config.urlApi + '/api/Book/Get/' + res.config.idBook,
       {
         params: {
-          idBook: res.idBook,
-          idProdutoMvc: res.idProdutoMvc,
-          exibitConteudoAberto: res.aberto,
+          idBook: res.config.idBook,
+          idProdutoMvc: res.config.idProdutoMvc,
+          exibitConteudoAberto: res.config.aberto,
           apenasParaEmail: true,
         }
       })
   .then(function (response) {
+    console.log(response.data)
     return response.data
   })
   .catch(function (error) {
@@ -57,10 +58,11 @@ function getConteudo (res) {
 }
 
 function getUltimaVersao (res) {
-  axios.get(res.urlApi + '/api/BookVersao/GetIdUltimaVersaoDoBook', {
-    idBook: res.idBook 
+  axios.get(res.config.urlApi + '/api/BookVersao/GetIdUltimaVersaoDoBook', {
+    idBook: res.config.idBook 
   })
   .then(function (response) {
+    console.log(response.data)
     return response.data
   })
   .catch(function (error) {
@@ -70,8 +72,9 @@ function getUltimaVersao (res) {
 }
 
 function getIdProduto (res) {
-  axios.get(res.urlApi + '/api/ProdutoMvc/GetIdProduto/' + res.idProdutoMvc)
+  axios.get(res.config.urlApi + '/api/ProdutoMvc/GetIdProduto/' + res.config.idProdutoMvc)
   .then(function (response) {
+    console.log(response.data)
     return response.data
   })
   .catch(function (error) {
@@ -81,8 +84,9 @@ function getIdProduto (res) {
 }
 
 function getDadosMvc (res) {
-  axios.get(res.urlApi + '/api/ProdutoMvc/GetPropriedadesMvc?id=' + res.idProdutoMvc)
+  axios.get(res.config.urlApi + '/api/ProdutoMvc/GetPropriedadesMvc?id=' + res.config.idProdutoMvc)
   .then(function (response) {
+    console.log(response.data)
     return response.data
   })
   .catch(function (error) {
@@ -92,8 +96,9 @@ function getDadosMvc (res) {
 }
 
 function getFontesRestritas (res) {
-  axios.get(res.urlApi + '/api/FonteRestricaoExibicao/CacheFontesRestritas/')
+  axios.get(res.config.urlApi + '/api/FonteRestricaoExibicao/CacheFontesRestritas/')
   .then(function (response) {
+    console.log(response.data)
     return response.data
   })
   .catch(function (error) {
