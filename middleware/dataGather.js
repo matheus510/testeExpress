@@ -15,37 +15,34 @@ module.exports = function(req, res, next) {
       'urlVis': 'http://visualizacao.boxnet.com.br/#',
       'urlPdf': 'http://pdf.boxnet.com.br'
     }
-    co(function *() {
-      const dados = yield getDados(res)
-      const conteudo = yield getConteudo(res)
-      const ultimaVersao = yield getUltimaVersao(res)
-      const idProduto = yield getIdProduto(res)
-      const dadosMvc = yield getDadosMvc(res)
-      const fontesRestritas = yield getFontesRestritas(res)
 
-      res.dados = dados
-      res.conteudo = conteudo
-      res.ultimaVersao = ultimaVersao
-      res.idProduto = idProduto
-      res.dadosMvc = dadosMvc
-      res.fontesRestritas = fontesRestritas
-
+    Promise.resolve(p1(res))
+    .then(() => {
+        return Promise.resolve(p2(res))
+          .then(() => {
+            return Promise.resolve(p3(res))
+              .then(() => {
+                return Promise.resolve(p4(res))
+                  .then(() => {
+                    return Promise.resolve(p5(res))
+                      .then(() => {
+                        return Promise.resolve(p6(res))
+                    })
+                })
+            })
+        })
     })
     next()
   }
 
-function getDados (res) {
+const p1 = function getDados (res) {
   return axios.get(res.config.urlApi + '/api/Book/Get/' + res.config.idBook)
   .then(function (response) {
-    //como fazer isso funcionar?
-    //quero pedir todas as infos da api em ORDEM.
-    //promises looks like the right way to do it
-    //but are they really? maybe callbacks could help...
-    //fuck synchronous programming, i want promises, not callbacks
-    res.config.idProdutoMvc = response.data.Template.idProdutoMvc
+    res.config.idProdutoMvc = response.data.Template.IdProdutoMvc
     res.config.aberto = (response.data.Template.Opcoes['Modelo Conteúdo Aberto Texto'] || response.data.Template.Opcoes['Modelo Conteúdo Aberto Mesclado']) ? true : false;
-    res.config.mesclado = (response.data.Template.Opcoes['Modelo Conteúdo Aberto Mesclado']) ? true : false;    
-    return response.data
+    res.config.mesclado = (response.data.Template.Opcoes['Modelo Conteúdo Aberto Mesclado']) ? true : false;
+    res.dados = JSON.stringify(response.data)
+
   })
   .catch(function (error) {
     console.error('Erro ao carregar dados do Book.')
@@ -53,35 +50,35 @@ function getDados (res) {
   })
 }
 
-function getConteudo (res) {
-  return axios.get(res.config.urlApi + '/api/Book/Get/' + res.config.idBook,
+const p2 = function getConteudo (res) {
+  return axios.get(res.config.urlApi + '/api/Book/GetConteudoComDadosDaNoticia',
       {
         params: {
           idBook: res.config.idBook,
           idProdutoMvc: res.config.idProdutoMvc,
-          exibitConteudoAberto: res.config.aberto,
+          exibirConteudoAberto: res.config.aberto,
           apenasParaEmail: true,
         }
       })
   .then(function (response) {
-
-    return response.data
+    return res.conteudo = JSON.stringify(response.data)
   })
   .catch(function (error) {
-    console.error('Erro ao carregar dados do Book.')
+    console.error('Erro ao carregar conteudo do Book.')
     throw error
   })
 }
 
-function getUltimaVersao (res) {
-  return axios.get(res.config.urlApi + '/api/BookVersao/GetIdUltimaVersaoDoBook', {
-    params: {
-      idBook: res.config.idBook 
-    }
+const p3 = function getUltimaVersao (res) {
+  return axios.get(res.config.urlApi + '/api/BookVersao/GetIdUltimaVersaoDoBook', 
+    {
+      params: {
+        idBook: res.config.idBook 
+      }
     })
   .then(function (response) {
 
-    return response.data
+    return res.ultimaVersao = response.data
   })
   .catch(function (error) {
     console.error('Erro ao carregar Última versão do Book.')
@@ -89,23 +86,24 @@ function getUltimaVersao (res) {
   })  
 }
 
-function getIdProduto (res) {
+const p4 = function getIdProduto (res) {
   return axios.get(res.config.urlApi + '/api/ProdutoMvc/GetIdProduto/' + res.config.idProdutoMvc)
   .then(function (response) {
 
-    return response.data
+    return res.idProduto = response.data
   })
   .catch(function (error) {
+
     console.error('Erro ao carregar o Id do produto')
     throw error
   })  
 }
 
-function getDadosMvc (res) {
+const p5 = function getDadosMvc (res) {
   return axios.get(res.config.urlApi + '/api/ProdutoMvc/GetPropriedadesMvc?id=' + res.config.idProdutoMvc)
   .then(function (response) {
 
-    return response.data
+    return res.dadosMvc = JSON.stringify(response.data)
   })
   .catch(function (error) {
     console.error('Erro ao carregar dados da MVCs.')
@@ -113,11 +111,11 @@ function getDadosMvc (res) {
   })  
 }
 
-function getFontesRestritas (res) {
+const p6 = function getFontesRestritas (res) {
   return axios.get(res.config.urlApi + '/api/FonteRestricaoExibicao/CacheFontesRestritas/')
   .then(function (response) {
-
-    return response.data
+    console.log()
+    return res.fontesRestritas = JSON.stringify(response.data)
   })
   .catch(function (error) {
     console.error('Erro ao carregar fontes restritas.')
