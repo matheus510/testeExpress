@@ -1,5 +1,4 @@
 const axios = require('axios')
-const co = require('co')
 
 module.exports = function(req, res, next) {
     res.config = {
