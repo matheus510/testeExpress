@@ -1,3 +1,5 @@
+const jade = require('jade')
+
 module.exports = function(req, res, next) {
         
   }
@@ -5,9 +7,11 @@ module.exports = function(req, res, next) {
 first of all:
 
 create templates.
-in Vue?
-
+in JADE?
 */
+
+
+
 
 /*
 1- identify template and template options
