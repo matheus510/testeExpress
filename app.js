@@ -6,13 +6,13 @@ const axios = require('axios')
 //middlewares
 const dataGather = require('./middleware/dataGather.js')
 const bookBuild = require('./middleware/bookBuild.js')
-
+const jade = require('jade')
 //applying global middlewares
 //app.use(cors)
 
 
 app.get('/book/:id', dataGather, function (req, res) {
-  res.send(res.data)
+  res.send(res.locals)
 })
 
 app.listen(3000, () => console.log('Example app listening on port 3000!'))
