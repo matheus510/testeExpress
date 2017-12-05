@@ -17,22 +17,16 @@ module.exports = function(req, res, next) {
     }
     Promise.resolve(p1(res))
     .then(() => {
-      console.log('promise 1 resolved')  
       return Promise.resolve(p2(res))
           .then(() => {
-            console.log('promise 2 resolved')
             return Promise.resolve(p3(res))
               .then(() => {
-                console.log('promise 3 resolved')
                 return Promise.resolve(p4(res))
                   .then(() => {
-                    console.log('promise 4 resolved')
                     return Promise.resolve(p5(res))
                       .then(() => {
-                        console.log('promise 5 resolved')
                         return Promise.resolve(p6(res))
                           .then(() => {
-                            console.log('promise 6 resolved')
                             next()
                           })
                     })
