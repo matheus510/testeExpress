@@ -1,0 +1,52 @@
+div//-(ng-init='template.confereFonteRestrita(noticias[$index].FonteMaxpress.Id, noticias[$index].IdNoticia)')
+table(cellspacing='0', cellpadding='0', width='100%')
+  tr
+    if pageData.container.Opcoes['Icone de Midia']
+    td(width='45', align='left')
+      img(src=`${template.config.urlPage}/BookContents/Clientes/${template.dados.Template.IdProdutoMvc}/img/icone-midia-${noticias[index].IdMidia}.png`, alt='') 
+    td
+      table(cellspacing='0', cellpadding='0', width='100%')
+        tr
+          td.noticia-data
+            if !container.Opcoes['Icone de Midia']
+            span
+              strong #{noticias[index].Midia}
+              |  -
+            span #{noticias[index].DataFonte}
+        tr
+          td.noticia-titulo
+            div
+              a.titulo(target='_blank', href=`${template.config.urlVis}/?idBook=${template.config.idBook}&idNoticia=${noticias[index].IdNoticia}&idProdutoMvc=${template.dados.Template.IdProdutoMvc}`)
+                | #{noticias[index].TituloNoticia}
+        tr
+          td.noticia-fonte
+            span.fonte #{noticias[index].Fonte}
+        if !template['fonteRestrita' + noticias[index].IdNoticia]
+        tr
+          td.noticia-texto
+            if noticias[index].IdMidia == 2
+            div
+              if template.config.mesclado
+              div
+                a.conteudo-aberto-imagem(target='_blank', ng-repeat='recorte in (noticias[$index].IdsRecortes)', href=`${template.config.urlVis}/?idBook=${template.config.idBook}&idNoticia=${noticias[index].IdNoticia}&idProdutoMvc=${template.dados.Template.IdProdutoMvc}`)
+                  img(border='0', src=`${template.config.urlApi}/api/Impressos/GetImagemDoRecorteComGrifo?idRecorte=${recorte}&idProduto=${template.dados.IdProduto}`, alt='')
+              if !template.config.mesclado
+              div
+                .conteudo-aberto-texto//-(ng-bind-html='noticias[$index].Conteudo | formatText')
+            if noticias[$index].IdMidia != 2
+            div
+              .conteudo-aberto-texto//-(ng-bind-html='noticias[$index].Conteudo | formatText')
+        if template['fonteRestrita' + noticias[$index].IdNoticia]
+        tr
+          td.noticia-texto
+            table(cellspacing='0', cellpadding='0', width='100%')
+              tr
+                td(style='padding-bottom: 20px;')
+                  span #{noticias[index].Conteudo} //-limitTo: 250}}...
+                  a.fonte-restrita-link(target='_blank', href=`${template.config.urlApi}/api/Url/Redirecionar?idProdutoMvc=${template.dados.Template.IdProdutoMvc}&idNoticia=${noticias[index].IdNoticia}`) Acessar notícia
+              tr
+                td.fonte-restrita-painel
+                  em #{template['fonteRestrita' + noticias[index].IdNoticia].TextoRestricao}
+        tr
+          td.btn-voltar-topo(align='right')
+            a(href='#topo') Voltar ao topo
