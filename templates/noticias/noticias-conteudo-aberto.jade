@@ -28,8 +28,9 @@ table(cellspacing='0', cellpadding='0', width='100%')
             div
               if template.config.mesclado
               div
-                a.conteudo-aberto-imagem(target='_blank', ng-repeat='recorte in (noticias[$index].IdsRecortes)', href=`${template.config.urlVis}/?idBook=${template.config.idBook}&idNoticia=${noticias[index].IdNoticia}&idProdutoMvc=${template.dados.Template.IdProdutoMvc}`)
-                  img(border='0', src=`${template.config.urlApi}/api/Impressos/GetImagemDoRecorteComGrifo?idRecorte=${recorte}&idProduto=${template.dados.IdProduto}`, alt='')
+                each idRecorte, index in noticias[$index].IdsRecortes
+                a.conteudo-aberto-imagem(target='_blank', href=`${template.config.urlVis}/?idBook=${template.config.idBook}&idNoticia=${noticias[index].IdNoticia}&idProdutoMvc=${template.dados.Template.IdProdutoMvc}`)
+                  img(border='0', src=`${template.config.urlApi}/api/Impressos/GetImagemDoRecorteComGrifo?idRecorte=${idRecorte}&idProduto=${template.dados.IdProduto}`, alt='')
               if !template.config.mesclado
               div
                 .conteudo-aberto-texto//-(ng-bind-html='noticias[$index].Conteudo | formatText')
