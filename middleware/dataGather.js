@@ -16,17 +16,18 @@ module.exports = function(req, res, next) {
     'urlVis': 'http://visualizacao.boxnet.com.br/#',
     'urlPdf': 'http://pdf.boxnet.com.br'
   }
-  Promise.resolve(p1(res))
+
+  Promise.resolve(p1(info))
   .then(() => {
-    return Promise.resolve(p2(res))
+    return Promise.resolve(p2(info))
         .then(() => {
-          return Promise.resolve(p3(res))
+          return Promise.resolve(p3(info))
             .then(() => {
-              return Promise.resolve(p4(res))
+              return Promise.resolve(p4(info))
                 .then(() => {
-                  return Promise.resolve(p5(res))
+                  return Promise.resolve(p5(info))
                     .then(() => {
-                      return Promise.resolve(p6(res))
+                      return Promise.resolve(p6(info))
                         .then(() => {
                           next()
                         })
@@ -37,7 +38,7 @@ module.exports = function(req, res, next) {
   })
 }
 
-const p1 = function getDados (res) {
+const p1 = function getDados (info) {
   return axios.get(info.config.urlApi + '/api/Book/Get/' + info.config.idBook)
   .then(function (response) {
     info.config.idProdutoMvc = response.data.Template.IdProdutoMvc
@@ -53,7 +54,7 @@ const p1 = function getDados (res) {
   })
 }
 
-const p2 = function getConteudo (res) {
+const p2 = function getConteudo (info) {
   return axios.get(info.config.urlApi + '/api/Book/GetConteudoComDadosDaNoticia',
       {
         params: {
@@ -72,7 +73,7 @@ const p2 = function getConteudo (res) {
   })
 }
 
-const p3 = function getUltimaVersao (res) {
+const p3 = function getUltimaVersao (info) {
   return axios.get(info.config.urlApi + '/api/BookVersao/GetIdUltimaVersaoDoBook', 
     {
       params: {
@@ -89,7 +90,7 @@ const p3 = function getUltimaVersao (res) {
   })  
 }
 
-const p4 = function getIdProduto (res) {
+const p4 = function getIdProduto (info) {
   return axios.get(info.config.urlApi + '/api/ProdutoMvc/GetIdProduto/' + info.config.idProdutoMvc)
   .then(function (response) {
 
@@ -102,7 +103,7 @@ const p4 = function getIdProduto (res) {
   })  
 }
 
-const p5 = function getDadosMvc (res) {
+const p5 = function getDadosMvc (info) {
   return axios.get(info.config.urlApi + '/api/ProdutoMvc/GetPropriedadesMvc?id=' + info.config.idProdutoMvc)
   .then(function (response) {
 
@@ -114,7 +115,7 @@ const p5 = function getDadosMvc (res) {
   })  
 }
 
-const p6 = function getFontesRestritas (res) {
+const p6 = function getFontesRestritas (info) {
   return axios.get(info.config.urlApi + '/api/FonteRestricaoExibicao/CacheFontesRestritas/')
   .then(function (response) {
     console.log()
