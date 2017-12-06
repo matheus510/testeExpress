@@ -1,23 +1,23 @@
 module.exports = function(req, res, next) {
-    const info = res.locals.data
-
-    const containers = info.conteudo.ArvoreDeOrdenacao
-    const noticias = containers.map(container => container.items)
-
-    noticias.reduce(noticia => {
-        let id = noticia.IdNoticia
-        let lead = noticia.LeadNoticia
-        let titulo = noticia.TituloNoticia
-        let fonte = noticia.Fonte
-        return {
-            id,
-            fonte,
-            titulo,
-            lead
-        }
-    }, {})
-    /* res.data.dados.Template.TemplateHtml */
-  
+    const containers = res.locals.data.conteudo[0].ArvoreDeOrdenacao
+    const noticias = containers.map((container) => container.items)
+    
+    const blocosDeNoticia = noticias.reduce((acc, blocoDeNoticias, index) => {
+        acc = acc || []
+        let bloquinho = blocoDeNoticias.map((noticia) => {
+            
+            return noticia = {
+                id: noticia.IdNoticia,
+                fonte: noticia.Fonte,
+                titulo: noticia.TituloNoticia
+            }
+        })
+        acc.push(bloquinho)
+        return acc
+    
+    }, [])
+    res.locals.blocosDeNoticia = blocosDeNoticia
+    next()
 }
 /* im a total failure */
 /* 

@@ -1,43 +1,5 @@
 const axios = require('axios')
 
-module.exports = function(req, res, next) {
-  const info = res.locals.data = {}
-  
-  info.config = {
-    'versao': '',
-    'authorization': {'Authorization': 'Basic YmFyYmFhOmJhcmJhYQ=='},
-    'idBook': req.params.id,
-    'idBookVersao': '',
-    'automatic': 'true',
-    'urlApi': 'http://cloud.boxnet.com.br',
-    'urlBookWeb': 'http://bookweb.boxnet.com.br',
-    'urlBookImpressos': 'http://bookimpressos.boxnet.com.br',
-    'urlPage': 'http://book1.boxnet.com.br',
-    'urlVis': 'http://visualizacao.boxnet.com.br/#',
-    'urlPdf': 'http://pdf.boxnet.com.br'
-  }
-
-  Promise.resolve(p1(info))
-  .then(() => {
-    return Promise.resolve(p2(info))
-        .then(() => {
-          return Promise.resolve(p3(info))
-            .then(() => {
-              return Promise.resolve(p4(info))
-                .then(() => {
-                  return Promise.resolve(p5(info))
-                    .then(() => {
-                      return Promise.resolve(p6(info))
-                        .then(() => {
-                          next()
-                        })
-                  })
-              })
-          })
-      })
-  })
-}
-
 const p1 = function getDados (info) {
   return axios.get(info.config.urlApi + '/api/Book/Get/' + info.config.idBook)
   .then(function (response) {
@@ -106,8 +68,9 @@ const p4 = function getIdProduto (info) {
 const p5 = function getDadosMvc (info) {
   return axios.get(info.config.urlApi + '/api/ProdutoMvc/GetPropriedadesMvc?id=' + info.config.idProdutoMvc)
   .then(function (response) {
-
-    return info.dadosMvc = response.data
+    info.dadosMvc = response.data
+    info.dadosMvc.CssLayout = JSON.parse(info.dadosMvc.CssLayout)
+    return info.dadosMvc
   })
   .catch(function (error) {
     console.error('Erro ao carregar dados da MVCs.')
@@ -126,3 +89,44 @@ const p6 = function getFontesRestritas (info) {
     throw error
   })  
 }
+
+module.exports = function(req, res, next) {
+  const info = res.locals.data = {}
+  
+  info.config = {
+    'versao': '',
+    'authorization': {'Authorization': 'Basic YmFyYmFhOmJhcmJhYQ=='},
+    'idBook': req.params.id,
+    'idBookVersao': '',
+    'automatic': 'true',
+    'urlApi': 'http://cloud.boxnet.com.br',
+    'urlBookWeb': 'http://bookweb.boxnet.com.br',
+    'urlBookImpressos': 'http://bookimpressos.boxnet.com.br',
+    'urlPage': 'http://book1.boxnet.com.br',
+    'urlVis': 'http://visualizacao.boxnet.com.br/#',
+    'urlPdf': 'http://pdf.boxnet.com.br'
+  }
+  
+
+  Promise.resolve(p1(info))
+  .then(() => {
+    return Promise.resolve(p2(info))
+        .then(() => {
+          return Promise.resolve(p3(info))
+            .then(() => {
+              return Promise.resolve(p4(info))
+                .then(() => {
+                  return Promise.resolve(p5(info))
+                    .then(() => {
+                      return Promise.resolve(p6(info))
+                        .then(() => {
+                          
+                          next()
+                        })
+                  })
+              })
+          })
+      })
+  })
+}
+
