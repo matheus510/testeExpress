@@ -60,3 +60,6 @@ typings/
 
 # test enviroment
 test.*
+
+#template content
+templates/content/

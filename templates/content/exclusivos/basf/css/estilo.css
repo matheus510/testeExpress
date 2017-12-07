@@ -1,0 +1,75 @@
+/*****
+PÁGINA
+******/
+* {
+  font-family: Arial, sans-serif;
+}
+html #book-container .txt-mensagem {
+  font-size: 12px;
+}
+html #book-container .txt-mensagem a {
+  color: #000000;
+  font-weight: bold;
+}
+html #book-container #book-body .canal-titulo {
+  font-weight: bold;
+  padding: 7px 0;
+}
+html #book-container #book-body .noticia {
+  padding: 0 10px;
+  vertical-align: top;
+}
+html #book-container #book-body .noticia .noticia-fonte {
+  line-height: 12px;
+  font-size: 11px;
+}
+html #book-container #book-body .noticia .noticia-titulo {
+  padding: 5px 0;
+  line-height: 12px;
+  font-size: 11px;
+}
+html #book-container #book-body .noticia .noticia-titulo a {
+  font-size: 11px;
+  line-height: 12px;
+  color: #333;
+  font-weight: bold;
+  text-decoration: none;
+}
+html #book-container #book-body .noticia .noticia-data {
+  line-height: 12px;
+  font-size: 11px;
+}
+html #book-container #book-body .noticia .noticia-cidade {
+  padding: 3px 0;
+  line-height: 12px;
+  font-size: 11px;
+}
+html #book-container #book-body #canal-corporativo {
+  padding: 0 0 10px;
+}
+html #book-container #book-body #canal-corporativo .canal-titulo {
+  color: #014a97;
+  font-size: 22px;
+}
+html #book-container #book-body #canal-corporativo .noticia {
+  border-left: 1px solid #EEE;
+}
+html #book-container #book-body .canais {
+  padding: 0 7px;
+}
+html #book-container #book-body .canais .canal-noticias {
+  border: 1px solid #DDD;
+  background: #f1f1f1;
+}
+html #book-container #book-body .canais .canal-titulo {
+  font-size: 12px;
+  padding: 0;
+  line-height: 1px;
+}
+html #book-container #book-body .canais .noticia {
+  padding: 10px 5px;
+  border-bottom: 1px solid #DDD;
+}
+html #book-container #book-body .canais .noticia:last-child {
+  border: 0;
+}
