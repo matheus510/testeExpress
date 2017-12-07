@@ -22,11 +22,11 @@ module.exports = function(req, res, next) {
 /* im a total failure */
 /* 
 TRANSPILE templates.
-to JADE. 
+to pug. 
 */
 
 /*
-Prepare URLs before passing them into jade templates.
+Prepare URLs before passing them into pug templates.
 do a service for this?
 */ 
 

@@ -9,7 +9,7 @@ const bookBuild = require('./middleware/bookBuild.js')
 
 //applying global middlewares
 //app.use(cors)
-const jade = require('jade')
+const pug = require('pug')
 
 app.get('/book/:id', dataGather, bookBuild, function (req, res) {
   res.send(res.locals.blocosDeNoticia)
