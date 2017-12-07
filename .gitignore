@@ -62,4 +62,4 @@ typings/
 test.*
 
 #template content
-templates/content/
+templates/content/*
