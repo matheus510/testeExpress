@@ -11,8 +11,8 @@ const bookBuild = require('./middleware/bookBuild.js')
 //app.use(cors)
 const pug = require('pug')
 
-app.get('/book/:id', dataGather, bookBuild, function (req, res) {
-  res.send(res.locals.blocosDeNoticia)
+app.get('/book/:id', dataGather, function (req, res) {
+  res.send(res.locals.data)
 })
 
 app.listen(3000, () => console.log('Example app listening on port 3000!'))

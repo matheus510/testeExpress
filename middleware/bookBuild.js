@@ -1,5 +1,5 @@
 module.exports = function(req, res, next) {
-    const containers = res.locals.data.conteudo[0].ArvoreDeOrdenacao
+/*     const containers = res.locals.data.conteudo[0].ArvoreDeOrdenacao
     const noticias = containers.map((container) => container.items)
     
     const blocosDeNoticia = noticias.reduce((acc, blocoDeNoticias, index) => {
@@ -16,7 +16,7 @@ module.exports = function(req, res, next) {
         return acc
     
     }, [])
-    res.locals.blocosDeNoticia = blocosDeNoticia
+    res.locals.blocosDeNoticia = blocosDeNoticia */
     next()
 }
 /* im a total failure */
