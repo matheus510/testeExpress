@@ -1,0 +1,32 @@
+table(border='0', cellpadding='0', cellspacing='0', width='100%')
+  each container, ContainerIndex in template.dados.Containers  
+    tr
+      td.container-canais
+        table(id=`container-${container.Id}`, cellpadding='0', cellspacing='0', width='100%')
+          each canais, canaisIndex in container.ArvoreDeOrdenacao  
+            tr
+              td
+                table(cellpadding='0', cellspacing='0', width='100%')
+                  tr
+                    td.canal-titulo
+                      table(cellpadding='0', cellspacing='0')
+                        tr
+                          td
+                            h2
+                              if container.Opcoes['Canais numerados']
+                                span #{canaisIndex + 1}
+                              a(name=`canal-${canais.IdContainerNodo}`, id=`canal-${canais.IdContainerNodo}`) #{canais.NomeNivel}
+                              if container.Opcoes['Contador de Noticias']
+                                span (#{template.countNoticiasByNodo(canais.IdContainerNodo)})
+                  tr
+                    each noticia, nivelIndex in canais.items
+                      td.canal-noticias
+                        .primeiro-nivel
+                          +noticias(opcoes='{{container.Opcoes}}', noticia='{{canais.items}}', ng-init="indexNumbers = (canaisIndex+1)+'.'+($index+1)+'.'") //-todo
+                    if container.Opcoes['Leia mais']
+                      tr
+                        td(align='right')
+                          table(cellpadding='0', cellspacing='0')
+                            tr
+                              td.canal-noticias-leiamais
+                                a(href=container.URLVejaMais, target='_blank') leia mais

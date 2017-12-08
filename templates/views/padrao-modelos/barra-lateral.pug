@@ -1,6 +1,7 @@
 table#barra-lateral(cellpadding='0', cellspacing='0', width='100%')
   tr
     td.barra1
+    if  
       table(ng-if='!$last', cellpadding='0', cellspacing='0', width='100%', ng-repeat='(ContainerIndex, container) in template.dados.Containers')
         tr
           td.container-canais
@@ -19,12 +20,13 @@ table#barra-lateral(cellpadding='0', cellspacing='0', width='100%')
                       td.canal-noticias
                         div(ng-repeat='(nivelIndex, noticia) in (noticias = canais.items)')
                           noticias(opcoes='{{container.Opcoes}}', noticia='{{noticia}}')
-                    tr(ng-if="container.Opcoes['Leia mais']")
-                      td(align='right')
-                        table(cellpadding='0', cellspacing='0')
-                          tr
-                            td.canal-noticias-leiamais
-                              a(ng-href='{{container.URLVejaMais}}', target='_blank') leia mais
+                    if container.Opcoes['Leia mais']
+                      tr
+                        td(align='right')
+                          table(cellpadding='0', cellspacing='0')
+                            tr
+                              td.canal-noticias-leiamais
+                                a(ng-href='{{container.URLVejaMais}}', target='_blank') leia mais
     td(width='20')
     td.barra2
       table(ng-if='$last', cellpadding='0', cellspacing='0', width='100%', ng-repeat='(ContainerIndex, container) in template.dados.Containers')
