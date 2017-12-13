@@ -1,0 +1,79 @@
+<table border="0" cellpadding="0" cellspacing="0" width="100%" ng-if="template.dados.Template.Opcoes['Contador'] || template.dados.Template.Opcoes['Contador Minutagem']">
+    <tr>
+        <td class="template-contador">
+            <table cellpadding="0" cellspacing="0" align="center" ng-if="template.dados.Template.Opcoes['Contador']">
+                <tr>
+                    <td>
+                        <img height="20" class="img-impresso" ng-if="template.contador.icones"
+                             ng-src="{{template.config.urlPage()}}/BookContents/Clientes/{{template.dados.Template.IdProdutoMvc}}/img/icone-midia-2.png"/>
+                        <span ng-if="!template.contador.icones">Impresso:</span>
+                    </td>
+                    <td>
+                        <div><strong>{{template.contador.impresso.length}}</strong></div>
+                    </td>
+                    <td>
+                        <img height="20" class="img-web" ng-if="template.contador.icones"
+                             ng-src="{{template.config.urlPage()}}/BookContents/Clientes/{{template.dados.Template.IdProdutoMvc}}/img/icone-midia-1.png"/>
+                        <span ng-if="!template.contador.icones">Web:</span>
+                    </td>
+                    <td>
+                        <div><strong>{{template.contador.web.length}}</strong></div>
+                    </td>
+                    <td>
+                        <img height="20" class="img-radio" ng-if="template.contador.icones"
+                             ng-src="{{template.config.urlPage()}}/BookContents/Clientes/{{template.dados.Template.IdProdutoMvc}}/img/icone-midia-3.png"/>
+                        <span ng-if="!template.contador.icones">Rádio:</span>
+                    </td>
+                    <td>
+                        <div>
+                            <strong>{{template.contador.radio.length}}</strong>
+                            <span ng-if="template.dados.Template.Opcoes['Contador Minutagem']" class="cont-minutagem">({{template.contadorMinutagem.radio | secToHrs}})</span>
+                        </div>
+                    </td>
+                    <td>
+                        <img height="20" class="img-tv" ng-if="template.contador.icones"
+                             ng-src="{{template.config.urlPage()}}/BookContents/Clientes/{{template.dados.Template.IdProdutoMvc}}/img/icone-midia-4.png"/>
+                        <span ng-if="!template.contador.icones">TV:</span>
+                    </td>
+                    <td>
+                        <div>
+                            <strong>{{template.contador.tv.length}}</strong>
+                            <span ng-if="template.dados.Template.Opcoes['Contador Minutagem']" class="cont-minutagem">({{template.contadorMinutagem.tv | secToHrs}})</span>
+                        </div>
+                    </td>
+                    <td>
+                        <span>Total:</span>
+                    </td>
+                    <td>
+                        <div><strong>{{template.contador.total}}</strong></div>
+                    </td>
+                </tr>
+            </table>
+
+            <table cellpadding="0" cellspacing="0" align="center" ng-if="!template.dados.Template.Opcoes['Contador'] && template.dados.Template.Opcoes['Contador Minutagem']">
+                <tr>
+                    <td>
+                        <img height="20" class="img-radio" ng-if="template.contador.icones"
+                             ng-src="{{template.config.urlPage()}}/BookContents/Clientes/{{template.dados.Template.IdProdutoMvc}}/img/icone-midia-3.png"/>
+                        <span ng-if="!template.contador.icones">Rádio:</span>
+                    </td>
+                    <td>
+                        <div>
+                            <span ng-if="template.dados.Template.Opcoes['Contador Minutagem']">{{template.contadorMinutagem.radio | secToHrs}}</span>
+                        </div>
+                    </td>
+                    <td>
+                        <img height="20" class="img-tv" ng-if="template.contador.icones"
+                             ng-src="{{template.config.urlPage()}}/BookContents/Clientes/{{template.dados.Template.IdProdutoMvc}}/img/icone-midia-4.png"/>
+                        <span ng-if="!template.contador.icones">TV:</span>
+                    </td>
+                    <td>
+                        <div>
+                            <span ng-if="template.dados.Template.Opcoes['Contador Minutagem']">{{template.contadorMinutagem.tv | secToHrs}}</span>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>

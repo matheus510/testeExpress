@@ -1,0 +1,76 @@
+<div ng-init="template.confereFonteRestrita(noticias[$index].FonteMaxpress.Id, noticias[$index].IdNoticia)">
+    <table cellspacing="0" cellpadding="0" width="100%">
+        <tr>
+            <td ng-if="container.Opcoes['Icone de Midia']" width="45" align="left">
+                <img ng-src="{{template.config.urlPage()}}/BookContents/Clientes/{{template.dados.Template.IdProdutoMvc}}/img/icone-midia-{{noticias[$index].IdMidia}}.png"
+                     alt=""/>
+            </td>
+            <td>
+                <table cellspacing="0" cellpadding="0" width="100%">
+                    <tr>
+                        <td class="noticia-data">
+                            <span ng-if="!container.Opcoes['Icone de Midia']"><strong>{{noticias[$index].Midia}}</strong> - </span>
+                            <span>{{noticias[$index].DataFonte | date: 'fullDate'}}</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="noticia-titulo">
+                            <div>
+                                <a class="titulo" target="_blank"
+                                   ng-href="{{template.config.urlVis()}}/?idBook={{template.config.idBook}}&idNoticia={{noticias[$index].IdNoticia}}&idProdutoMvc={{template.dados.Template.IdProdutoMvc}}">
+                                    {{noticias[$index].TituloNoticia}}
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="noticia-fonte">
+                            <span class="fonte">{{noticias[$index].Fonte | uppercase}}</span>
+                        </td>
+                    </tr>
+                    <tr ng-if="!template['fonteRestrita' + noticias[$index].IdNoticia]">
+                        <td class="noticia-texto">
+                            <div ng-if="noticias[$index].IdMidia == 2">
+                                <div ng-if="template.config.mesclado">
+                                    <a target="_blank" ng-repeat="recorte in (noticias[$index].IdsRecortes)" class="conteudo-aberto-imagem"
+                                       ng-href="{{template.config.urlVis()}}/?idBook={{template.config.idBook}}&idNoticia={{noticias[$index].IdNoticia}}&idProdutoMvc={{template.dados.Template.IdProdutoMvc}}">
+                                        <img border="0" ng-src="{{template.config.urlApi()}}/api/Impressos/GetImagemDoRecorteComGrifo?idRecorte={{recorte}}&idProduto={{template.dados.IdProduto}}" alt=""/>
+                                    </a>
+                                </div>
+                                <div ng-if="!template.config.mesclado">
+                                    <div class="conteudo-aberto-texto" ng-bind-html="noticias[$index].Conteudo | formatText"></div>
+                                </div>
+                            </div>
+                            <div ng-if="noticias[$index].IdMidia != 2">
+                                <div class="conteudo-aberto-texto" ng-bind-html="noticias[$index].Conteudo | formatText"></div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr ng-if="template['fonteRestrita' + noticias[$index].IdNoticia]">
+                        <td class="noticia-texto">
+                            <table cellspacing="0" cellpadding="0" width="100%">
+                                <tr>
+                                    <td style="padding-bottom: 20px;">
+                                        <span>{{noticias[$index].Conteudo | limitTo: 250}}...</span>
+                                        <a target="_blank" class="fonte-restrita-link"
+                                           ng-href="{{template.config.urlApi()}}/api/Url/Redirecionar?idProdutoMvc={{template.dados.Template.IdProdutoMvc}}&idNoticia={{noticias[$index].IdNoticia}}">Acessar notícia</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="fonte-restrita-painel">
+                                        <em>{{template['fonteRestrita' + noticias[$index].IdNoticia].TextoRestricao}}</em>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="right" class="btn-voltar-topo">
+                            <a href="#topo">Voltar ao topo</a>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</div>

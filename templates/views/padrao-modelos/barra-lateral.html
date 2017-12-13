@@ -1,0 +1,99 @@
+<table id="barra-lateral" cellpadding="0" cellspacing="0" width="100%" >
+    <tr>
+        <td class="barra1">
+            <table ng-if="!$last" cellpadding="0" cellspacing="0" width="100%" ng-repeat="(ContainerIndex, container) in template.dados.Containers">
+                <tr>
+                    <td class="container-canais">
+                        <table cellpadding="0" cellspacing="0" width="100%">
+                            <tr ng-repeat="(canaisIndex, canais) in container.ArvoreDeOrdenacao">
+                                <td>
+                                    <table cellpadding="0" cellspacing="0" width="100%">
+                                        <tr>
+                                            <td class="canal-titulo">
+                                                <table>
+                                                    <tr>
+                                                        <td>
+                                                            <h2>
+                                                                <a name="canal-{{canais.IdContainerNodo}}" id="canal-{{canais.IdContainerNodo}}">{{canais.NomeNivel}}</a>
+                                                            </h2>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="canal-noticias">
+                                                <div ng-repeat="(nivelIndex, noticia) in (noticias = canais.items)">
+                                                    <noticias opcoes="{{container.Opcoes}}" noticia="{{noticia}}"></noticias>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr ng-if="container.Opcoes['Leia mais']">
+                                            <td align="right">
+                                                <table cellpadding="0" cellspacing="0">
+                                                    <tr>
+                                                        <td class="canal-noticias-leiamais">
+                                                            <a ng-href="{{container.URLVejaMais}}" target="_blank">leia mais</a>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </td>
+        <td width="20"></td>
+        <td class="barra2">
+            <table ng-if="$last" cellpadding="0" cellspacing="0" width="100%" ng-repeat="(ContainerIndex, container) in template.dados.Containers">
+                <tr>
+                    <td class="container-canais">
+                        <table cellpadding="0" cellspacing="0" width="100%">
+                            <tr ng-repeat="(canaisIndex, canais) in container.ArvoreDeOrdenacao">
+                                <td>
+                                    <table cellpadding="0" cellspacing="0" width="100%">
+                                        <tr>
+                                            <td class="canal-titulo">
+                                                <table>
+                                                    <tr>
+                                                        <td>
+                                                            <h2>
+                                                                <a name="canal-{{canais.IdContainerNodo}}" id="canal-{{canais.IdContainerNodo}}">{{canais.NomeNivel}}</a>
+                                                            </h2>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="canal-noticias">
+                                                <div ng-repeat="(nivelIndex, noticia) in (noticias = canais.items)">
+                                                    <noticias opcoes="{{container.Opcoes}}" noticia="{{noticia.ExistemFilhos}}"></noticias>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr ng-if="container.Opcoes['Leia mais']">
+                                            <td align="right">
+                                                <table cellpadding="0" cellspacing="0">
+                                                    <tr>
+                                                        <td class="canal-noticias-leiamais">
+                                                            <a ng-href="{{container.URLVejaMais}}" target="_blank">leia mais</a>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>

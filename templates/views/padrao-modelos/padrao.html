@@ -1,0 +1,48 @@
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr ng-repeat="(ContainerIndex, container) in template.dados.Containers">
+        <td class="container-canais">
+            <table id="container-{{container.Id}}" cellpadding="0" cellspacing="0" width="100%">
+                <tr ng-repeat="(canaisIndex, canais) in container.ArvoreDeOrdenacao">
+                    <td>
+                        <table cellpadding="0" cellspacing="0" width="100%">
+                            <tr>
+                                <td class="canal-titulo">
+                                    <table cellpadding="0" cellspacing="0">
+                                        <tr>
+                                            <td>
+                                                <h2>
+                                                    <span ng-if="container.Opcoes['Canais numerados']">{{canaisIndex + 1}}.</span>
+                                                    <a name="canal-{{canais.IdContainerNodo}}" id="canal-{{canais.IdContainerNodo}}">{{canais.NomeNivel}}</a>
+                                                    <span ng-if="container.Opcoes['Contador de Noticias']">({{template.countNoticiasByNodo(canais.IdContainerNodo)}})</span>
+                                                </h2>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="canal-noticias">
+                                    <div ng-repeat="(nivelIndex, noticia) in (noticias = canais.items)" class="primeiro-nivel">
+                                        <noticias opcoes="{{container.Opcoes}}" noticia="{{noticia}}"
+                                                  ng-init="indexNumbers = (canaisIndex+1)+'.'+($index+1)+'.'"></noticias>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr ng-if="container.Opcoes['Leia mais']">
+                                <td align="right">
+                                    <table cellpadding="0" cellspacing="0">
+                                        <tr>
+                                            <td class="canal-noticias-leiamais">
+                                                <a ng-href="{{container.URLVejaMais}}" target="_blank">leia mais</a>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>

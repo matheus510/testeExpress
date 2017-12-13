@@ -1,0 +1,101 @@
+<table cellspacing="0" cellpadding="0" width="100%" ng-init="noticias[$index].UsarLinkOriginal = (container.Opcoes['Link original'] && (noticias[$index].IdMidia == 1))">
+    <tr>
+        <td ng-if="container.Opcoes['Icone de Midia']" width="45" align="left">
+            <img ng-if="!template.dados.Template.Opcoes['Template Boxnet']"
+                 ng-src="{{template.config.urlPage()}}/BookContents/Clientes/{{template.dados.Template.IdProdutoMvc}}/img/icone-midia-{{noticias[$index].IdMidia}}.png"
+                 alt=""/>
+            <img ng-if="template.dados.Template.Opcoes['Template Boxnet']"
+                 ng-src="{{template.config.urlPage()}}/BookContents/Clientes/0/img/icone-midia-{{noticias[$index].IdMidia}}.png"
+                 alt=""/>
+        </td>
+        <td>
+            <table cellspacing="0" cellpadding="0" width="100%">
+                <tr ng-if="container.Opcoes['Avaliação'] && noticias[$index].Avaliacao != undefined">
+                    <td class="noticia-avaliacao">
+                        <table cellspacing="0" cellpadding="0">
+                            <tr>
+                                <td class="noticia-avaliacao-cor" style="background: {{noticias[$index].Avaliacao.CorAvaliacao}}">
+                                </td>
+                                <td><span>{{noticias[$index].Avaliacao.Descricao | uppercase}}</span></td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="noticia-data">
+                        <span ng-if="!container.Opcoes['Icone de Midia']"><strong>{{noticias[$index].Midia}}</strong> - </span>
+                        <span>{{noticias[$index].DataFonte | date: 'fullDate'}}</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="noticia-titulo">
+                        <div ng-if="noticias[$index].IdMidia == 3 || noticias[$index].IdMidia == 4">
+                            <span style="font-size: 11px;">
+                                <strong ng-if="container.Opcoes['Minutagem'] && noticias[$index].Duracao != undefined"> ({{noticias[$index].Duracao | secToHrs}})</strong></span>
+                        </div>
+
+                        <div ng-if="container.Opcoes['Ver em Navegadores Antigos']">
+                            <a class="titulo" target="_blank"
+                               ng-if="!noticias[$index].UsarLinkOriginal"
+                               ng-href="{{template.config.urlPage()}}/Visualizar/?b={{template.config.idBookVersao}}&n={{noticias[$index].IdNoticia}}&p={{template.dados.IdProduto}}&pmvc={{template.dados.Template.IdProdutoMvc}}">
+                                {{noticias[$index].TituloNoticia}}
+                            </a>
+                            <a class="titulo" target="_blank"
+                               ng-if="noticias[$index].UsarLinkOriginal"
+                               ng-href="{{noticias[$index].UrlNoticia}}">
+                                {{noticias[$index].TituloNoticia}}
+                            </a>
+                        </div>
+                        <div ng-if="!container.Opcoes['Ver em Navegadores Antigos']">
+                            <a class="titulo" target="_blank"
+                               ng-if="!noticias[$index].UsarLinkOriginal"
+                               ng-href="{{template.config.urlVis()}}/?idBook={{template.config.idBook}}&idNoticia={{noticias[$index].IdNoticia}}&idProdutoMvc={{template.dados.Template.IdProdutoMvc}}">
+                                {{noticias[$index].TituloNoticia}}
+                            </a>
+                            <a class="titulo" target="_blank"
+                               ng-if="noticias[$index].UsarLinkOriginal"
+                               ng-href="{{noticias[$index].UrlNoticia}}">
+                                {{noticias[$index].TituloNoticia}}
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="noticia-fonte">
+                        <span class="fonte">{{noticias[$index].Fonte | splitNaBarra:container:noticias[$index].Midia | uppercase}}</span>
+                        <a ng-href="{{template.config.urlVis()}}/?idNoticia={{noticias[$index].IdNoticia}}&idProdutoMvc={{template.dados.Template.IdProdutoMvc}}&personalizado=similares"
+                           target="_blank" ng-if="noticias[$index].TemNoticiasSimilares" class="noticia-fonte">
+                            <strong>[+]</strong>
+                        </a>
+
+                        <span><strong ng-if="container.Opcoes['Classificação'] && noticias[$index].Abrangencia != undefined"> ({{noticias[$index].Abrangencia.Descricao}})</strong></span>
+                    </td>
+                </tr>
+                <tr ng-if="container.Opcoes['Noticias Relacionadas'] && noticias[$index].TemNoticiasRelacionadas">
+                    <td class="noticia-texto">
+                        <div ng-repeat="relacionadas in noticias[$index].items">
+                            <a target="_blank" ng-href="{{template.config.urlVis()}}/?idBook={{template.config.idBook}}&idNoticia={{relacionadas.IdNoticia}}&idProdutoMvc={{template.dados.Template.IdProdutoMvc}}">
+                                {{relacionadas.Fonte | splitNaBarra:container:relacionadas.Midia | uppercase}}</a>
+                        </div>
+                    </td>
+                </tr>
+                <tr ng-if="container.Opcoes['Sinopse']">
+                    <td class="noticia-texto">
+                        <span ng-if="noticias[$index].Sinopse" ng-bind-html="noticias[$index].Sinopse">
+                        </span>
+                        <span ng-if="container.Opcoes['Lead'] && (noticias[$index].Sinopse === null || noticias[$index].Sinopse === '')">
+                            {{noticias[$index].LeadNoticia}}
+                        </span>
+                    </td>
+                </tr>
+                <tr ng-if="container.Opcoes['Sinopse'] === undefined && container.Opcoes['Lead']">
+                    <td class="noticia-texto">
+                        <span>
+                            {{noticias[$index].LeadNoticia}}
+                        </span>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>

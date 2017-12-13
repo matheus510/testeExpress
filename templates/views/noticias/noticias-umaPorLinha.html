@@ -1,0 +1,16 @@
+<table cellspacing="0" cellpadding="0" width="100%">
+    <tr class="noticia-repeat">
+        <td class="noticia-col1">
+            <div class="noticia-colunas">
+                <div ng-if="! mostrarAberto">
+                    <noticias-conteudo-padrao ng-if="template.noticiaTemplate == ''"></noticias-conteudo-padrao>
+                    <div ng-if="template.noticiaTemplate != ''" ng-include="'noticiaTemplate'"></div>
+                </div>
+                <div ng-if="mostrarAberto">
+                    <noticias-conteudo-aberto ng-if="template.noticiaAbertaTemplate == ''"></noticias-conteudo-aberto>
+                    <div ng-if="template.noticiaAbertaTemplate != ''" ng-include="'noticiaAbertaTemplate'"></div>
+                </div>
+            </div>
+        </td>
+    </tr>
+</table>
