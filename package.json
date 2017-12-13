@@ -14,7 +14,7 @@
   },
   "license": "ISC",
   "dependencies": {
-    "angular-template": "^2.3.2",
+    "angular-template": "git+https://github.com/matheus510/angular-template.git",
     "axios": "^0.17.1",
     "body-parser": "1.15.0",
     "co": "^4.6.0",
@@ -24,6 +24,7 @@
     "express": "4.13.4",
     "express-jwt": "3.3.0",
     "express-session": "1.13.0",
+    "fs": "0.0.1-security",
     "jsonwebtoken": "7.1.9",
     "method-override": "2.3.5",
     "methods": "1.1.2",
