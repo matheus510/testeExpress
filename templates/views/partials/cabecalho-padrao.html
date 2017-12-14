@@ -26,16 +26,16 @@
                     </td>
                     <td width="100" class="botoes">
                         <a ht-if="dataBook.navegadoresAntigos"
-                           ht-href="{{dataBook.config.urlPage}}/Visualizar/?b={{dataBook.config.idBookVersao}}&p={{dataBook.dados.IdProduto}}&pmvc={{dataBook.dados.Template.IdProdutoMvc}}">
-                            ver todas
+                           href="{{dataBook.config.urlPage}}/Visualizar/?b={{dataBook.config.idBookVersao}}batatap={{dataBook.dados.IdProduto}}batatapmvc={{dataBook.dados.Template.IdProdutoMvc}}">
+                            ver todas 
                         </a>
                         <a ht-if="!dataBook.navegadoresAntigos"
-                           ht-href="{{dataBook.config.urlVis}}/?idBook={{dataBook.config.idBook}}&idProdutoMvc={{dataBook.dados.Template.IdProdutoMvc}}&idNoticia=0">
-                            ver todas
+                           href="{{dataBook.config.urlVis}}/?idBook={{dataBook.config.idBook}}batataidProdutoMvc={{dataBook.dados.Template.IdProdutoMvc}}batataidNoticia=0">
+                            ver todas batata
                         </a>
                     </td>
                     <td width="100" class="botoes">
-                        <a ht-href="{{dataBook.dados.UrlGerarPdf}}">
+                        <a href="{{dataBook.config.urlPdf}}">
                             gerar pdf
                         </a>
                     </td>
