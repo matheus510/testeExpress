@@ -1,5 +1,5 @@
 <table border="0" cellpadding="0" cellspacing="0" width="100%">
-    <tr ht-repeat="(ContainerIndex, container) in bookData.conteudo">
+    <tr ht-repeat="(ContainerIndex, container) in bookData.dados">
         <td class="container-canais">
             <table id="container-{{container.Id}}" cellpadding="0" cellspacing="0" width="100%">
                 <tr ht-repeat="(canaisIndex, canais) in container.ArvoreDeOrdenacao">
@@ -22,8 +22,8 @@
                             <tr>
                                 <td class="canal-noticias">
                                     <div ht-repeat="(nivelIndex, noticia) in (noticias = canais.items)" class="primeiro-nivel">
-                                        <div ht-include="../noticias/noticias-umaPorLinha.html"></div>
-                                        <!-- <div ht-if="!(container.Opcoes['Modelo Conteúdo Aberto Texto'] || container.Opcoes['Modelo Conteúdo Aberto Mesclado'] || container.Opcoes['Uma noticia por linha'])" ht-include="../noticias/noticias-duasPorLinha.html"></div> -->
+                                        <!-- <div ht-if="(container.Opcoes['Modelo Conteúdo Aberto Texto'] || container.Opcoes['Modelo Conteúdo Aberto Mesclado'] || container.Opcoes['Uma noticia por linha'])" ht-include="../noticias/noticias-umaPorLinha.html"></div> -->
+                                        <div ht-if="!(container.Opcoes['Modelo Conteúdo Aberto Texto'] || container.Opcoes['Modelo Conteúdo Aberto Mesclado'] || container.Opcoes['Uma noticia por linha'])" ht-include="../noticias/noticias-duasPorLinha.html"></div>
                                     </div>
                                 </td>
                             </tr>
