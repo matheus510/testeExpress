@@ -1,21 +1,21 @@
-<table ng-if="$even" cellpadding="0" cellspacing="0" width="100%">
+<table ht-if="(nivelIndex / 2) % 0" cellpadding="0" cellspacing="0" width="100%">
     <tr class="noticia-repeat">
         <td class="noticia-col1">
             <div class="noticia-colunas">
-                <noticias-conteudo-padrao ng-if="template.noticiaTemplate == ''"></noticias-conteudo-padrao>
-                <div ng-if="template.noticiaTemplate != ''" ng-include="'noticiaTemplate'"></div>
+                <div ht-if="bookData.dados.Template.Css.Noticia == ''" ht-include="./noticias-conteudo-padrao.html"></div>
+                <div ht-if="bookData.dados.Template.Css.Noticia != ''" ht-include="bookData.dados.Template.Css.Noticia.Configuracao"></div>
             </div>
         </td>
-        <td class="noticia-col2" ng-if="noticias[$index+1]">
+        <td class="noticia-col2" ht-if="noticias[(nivelIndex + 1)]">
             <div class="noticia-colunas">
-                <noticias-conteudo-padrao ng-if="template.noticiaTemplate == ''" ng-init="$index = $index+1"></noticias-conteudo-padrao>
-                <div ng-if="template.noticiaTemplate != ''" ng-init="$index = $index+1" ng-include="'noticiaTemplate'"></div>
+                <div ht-if="bookData.dados.Template.Css.Noticia == ''" ht-include="./noticias-conteudo-padrao.html"></div>
+                <div ht-if="bookData.dados.Template.Css.Noticia != ''" ht-include="bookData.dados.Template.Css.Noticia.Configuracao"></div>
             </div>
         </td>
     </tr>
 </table>
 
-<table ng-if="$odd" ng-class="{'repeat-vazio': $odd}">
+<table ht-if="!((nivelIndex / 2) % 0)" ht-class="{'repeat-vazio': true}">
     <tr>
         <td></td>
     </tr>

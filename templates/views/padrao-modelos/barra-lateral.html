@@ -1,11 +1,11 @@
 <table id="barra-lateral" cellpadding="0" cellspacing="0" width="100%" >
     <tr>
         <td class="barra1">
-            <table ng-if="!$last" cellpadding="0" cellspacing="0" width="100%" ng-repeat="(ContainerIndex, container) in template.dados.Containers">
+            <table ht-if="!$last" cellpadding="0" cellspacing="0" width="100%" ht-repeat="(ContainerIndex, container) in template.dados.Containers">
                 <tr>
                     <td class="container-canais">
                         <table cellpadding="0" cellspacing="0" width="100%">
-                            <tr ng-repeat="(canaisIndex, canais) in container.ArvoreDeOrdenacao">
+                            <tr ht-repeat="(canaisIndex, canais) in container.ArvoreDeOrdenacao">
                                 <td>
                                     <table cellpadding="0" cellspacing="0" width="100%">
                                         <tr>
@@ -23,17 +23,17 @@
                                         </tr>
                                         <tr>
                                             <td class="canal-noticias">
-                                                <div ng-repeat="(nivelIndex, noticia) in (noticias = canais.items)">
+                                                <div ht-repeat="(nivelIndex, noticia) in (noticias = canais.items)">
                                                     <noticias opcoes="{{container.Opcoes}}" noticia="{{noticia}}"></noticias>
                                                 </div>
                                             </td>
                                         </tr>
-                                        <tr ng-if="container.Opcoes['Leia mais']">
+                                        <tr ht-if="container.Opcoes['Leia mais']">
                                             <td align="right">
                                                 <table cellpadding="0" cellspacing="0">
                                                     <tr>
                                                         <td class="canal-noticias-leiamais">
-                                                            <a ng-href="{{container.URLVejaMais}}" target="_blank">leia mais</a>
+                                                            <a ht-href="{{container.URLVejaMais}}" target="_blank">leia mais</a>
                                                         </td>
                                                     </tr>
                                                 </table>
@@ -49,11 +49,11 @@
         </td>
         <td width="20"></td>
         <td class="barra2">
-            <table ng-if="$last" cellpadding="0" cellspacing="0" width="100%" ng-repeat="(ContainerIndex, container) in template.dados.Containers">
+            <table ht-if="$last" cellpadding="0" cellspacing="0" width="100%" ht-repeat="(ContainerIndex, container) in template.dados.Containers">
                 <tr>
                     <td class="container-canais">
                         <table cellpadding="0" cellspacing="0" width="100%">
-                            <tr ng-repeat="(canaisIndex, canais) in container.ArvoreDeOrdenacao">
+                            <tr ht-repeat="(canaisIndex, canais) in container.ArvoreDeOrdenacao">
                                 <td>
                                     <table cellpadding="0" cellspacing="0" width="100%">
                                         <tr>
@@ -71,17 +71,17 @@
                                         </tr>
                                         <tr>
                                             <td class="canal-noticias">
-                                                <div ng-repeat="(nivelIndex, noticia) in (noticias = canais.items)">
+                                                <div ht-repeat="(nivelIndex, noticia) in (noticias = canais.items)">
                                                     <noticias opcoes="{{container.Opcoes}}" noticia="{{noticia.ExistemFilhos}}"></noticias>
                                                 </div>
                                             </td>
                                         </tr>
-                                        <tr ng-if="container.Opcoes['Leia mais']">
+                                        <tr ht-if="container.Opcoes['Leia mais']">
                                             <td align="right">
                                                 <table cellpadding="0" cellspacing="0">
                                                     <tr>
                                                         <td class="canal-noticias-leiamais">
-                                                            <a ng-href="{{container.URLVejaMais}}" target="_blank">leia mais</a>
+                                                            <a ht-href="{{container.URLVejaMais}}" target="_blank">leia mais</a>
                                                         </td>
                                                     </tr>
                                                 </table>

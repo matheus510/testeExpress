@@ -4,11 +4,11 @@
             <table cellpadding="0" cellspacing="0" width="100%">
                 <tr>
                     <td class="header-img">
-                        <img ht-if="!dataBook.dados.Template.Opcoes['Template Boxnet']"
-                             ht-src="{{dataBook.config.urlPage}}/BookContents/Clientes/{{dataBook.dados.Template.IdProdutoMvc}}/img/header.png{{dataBook.config.versao}}"
+                        <img ht-if="!bookData.dados.Template.Opcoes['Template Boxnet']"
+                             ht-src="{{bookData.config.urlPage}}/BookContents/Clientes/{{bookData.dados.Template.IdProdutoMvc}}/img/header.png{{bookData.config.versao}}"
                              alt=""/>
-                        <img ht-if="dataBook.dados.Template.Opcoes['Template Boxnet']"
-                             ht-src="{{dataBook.config.urlPage}}/BookContents/Clientes/0/img/header.png{{dataBook.config.versao}}"
+                        <img ht-if="bookData.dados.Template.Opcoes['Template Boxnet']"
+                             ht-src="{{bookData.config.urlPage}}/BookContents/Clientes/0/img/header.png{{bookData.config.versao}}"
                              alt=""/>
                     </td>
                 </tr>
@@ -21,21 +21,21 @@
                 <tr>
                     <td class="data-book">
                         <div>
-                            {{dataBook.dados.DataCadastro | date: 'fullDate'}}
+                            {{bookData.dados.DataCadastro | date: 'fullDate'}}
                         </div>
                     </td>
                     <td width="100" class="botoes">
-                        <a ht-if="dataBook.navegadoresAntigos"
-                           href="{{dataBook.config.urlPage}}/Visualizar/?b={{dataBook.config.idBookVersao}}batatap={{dataBook.dados.IdProduto}}batatapmvc={{dataBook.dados.Template.IdProdutoMvc}}">
+                        <a ht-if="bookData.navegadoresAntigos"
+                           href="{{bookData.config.urlPage}}/Visualizar/?b={{bookData.config.idBookVersao}}&p={{bookData.dados.IdProduto}}&pmvc={{bookData.dados.Template.IdProdutoMvc}}">
                             ver todas 
                         </a>
-                        <a ht-if="!dataBook.navegadoresAntigos"
-                           href="{{dataBook.config.urlVis}}/?idBook={{dataBook.config.idBook}}batataidProdutoMvc={{dataBook.dados.Template.IdProdutoMvc}}batataidNoticia=0">
-                            ver todas batata
+                        <a ht-if="!bookData.navegadoresAntigos"
+                           href="{{bookData.config.urlVis}}/?idBook={{bookData.config.idBook}}&idProdutoMvc={{bookData.dados.Template.IdProdutoMvc}}&idNoticia=0">
+                            ver todas
                         </a>
                     </td>
                     <td width="100" class="botoes">
-                        <a href="{{dataBook.config.urlPdf}}">
+                        <a href="{{bookData.config.urlPdf}}">
                             gerar pdf
                         </a>
                     </td>

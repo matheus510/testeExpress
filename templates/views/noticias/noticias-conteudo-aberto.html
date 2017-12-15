@@ -1,64 +1,64 @@
-<div ng-init="template.confereFonteRestrita(noticias[$index].FonteMaxpress.Id, noticias[$index].IdNoticia)">
+<div ht-init="template.confereFonteRestrita(noticias[nivelIndex].FonteMaxpress.Id, noticias[nivelIndex].IdNoticia)">
     <table cellspacing="0" cellpadding="0" width="100%">
         <tr>
-            <td ng-if="container.Opcoes['Icone de Midia']" width="45" align="left">
-                <img ng-src="{{template.config.urlPage()}}/BookContents/Clientes/{{template.dados.Template.IdProdutoMvc}}/img/icone-midia-{{noticias[$index].IdMidia}}.png"
+            <td ht-if="container.Opcoes['Icone de Midia']" width="45" align="left">
+                <img ht-src="{{template.config.urlPage()}}/BookContents/Clientes/{{template.dados.Template.IdProdutoMvc}}/img/icone-midia-{{noticias[nivelIndex].IdMidia}}.png"
                      alt=""/>
             </td>
             <td>
                 <table cellspacing="0" cellpadding="0" width="100%">
                     <tr>
                         <td class="noticia-data">
-                            <span ng-if="!container.Opcoes['Icone de Midia']"><strong>{{noticias[$index].Midia}}</strong> - </span>
-                            <span>{{noticias[$index].DataFonte | date: 'fullDate'}}</span>
+                            <span ht-if="!container.Opcoes['Icone de Midia']"><strong>{{noticias[nivelIndex].Midia}}</strong> - </span>
+                            <span>{{noticias[nivelIndex].DataFonte | date: 'fullDate'}}</span>
                         </td>
                     </tr>
                     <tr>
                         <td class="noticia-titulo">
                             <div>
                                 <a class="titulo" target="_blank"
-                                   ng-href="{{template.config.urlVis()}}/?idBook={{template.config.idBook}}&idNoticia={{noticias[$index].IdNoticia}}&idProdutoMvc={{template.dados.Template.IdProdutoMvc}}">
-                                    {{noticias[$index].TituloNoticia}}
+                                   ht-href="{{template.config.urlVis()}}/?idBook={{template.config.idBook}}&idNoticia={{noticias[nivelIndex].IdNoticia}}&idProdutoMvc={{template.dados.Template.IdProdutoMvc}}">
+                                    {{noticias[nivelIndex].TituloNoticia}}
                                 </a>
                             </div>
                         </td>
                     </tr>
                     <tr>
                         <td class="noticia-fonte">
-                            <span class="fonte">{{noticias[$index].Fonte | uppercase}}</span>
+                            <span class="fonte">{{noticias[nivelIndex].Fonte | uppercase}}</span>
                         </td>
                     </tr>
-                    <tr ng-if="!template['fonteRestrita' + noticias[$index].IdNoticia]">
+                    <tr ht-if="!template['fonteRestrita' + noticias[nivelIndex].IdNoticia]">
                         <td class="noticia-texto">
-                            <div ng-if="noticias[$index].IdMidia == 2">
-                                <div ng-if="template.config.mesclado">
-                                    <a target="_blank" ng-repeat="recorte in (noticias[$index].IdsRecortes)" class="conteudo-aberto-imagem"
-                                       ng-href="{{template.config.urlVis()}}/?idBook={{template.config.idBook}}&idNoticia={{noticias[$index].IdNoticia}}&idProdutoMvc={{template.dados.Template.IdProdutoMvc}}">
-                                        <img border="0" ng-src="{{template.config.urlApi()}}/api/Impressos/GetImagemDoRecorteComGrifo?idRecorte={{recorte}}&idProduto={{template.dados.IdProduto}}" alt=""/>
+                            <div ht-if="noticias[nivelIndex].IdMidia == 2">
+                                <div ht-if="template.config.mesclado">
+                                    <a target="_blank" ht-repeat="recorte in (noticias[nivelIndex].IdsRecortes)" class="conteudo-aberto-imagem"
+                                       ht-href="{{template.config.urlVis()}}/?idBook={{template.config.idBook}}&idNoticia={{noticias[nivelIndex].IdNoticia}}&idProdutoMvc={{template.dados.Template.IdProdutoMvc}}">
+                                        <img border="0" ht-src="{{template.config.urlApi()}}/api/Impressos/GetImagemDoRecorteComGrifo?idRecorte={{recorte}}&idProduto={{template.dados.IdProduto}}" alt=""/>
                                     </a>
                                 </div>
-                                <div ng-if="!template.config.mesclado">
-                                    <div class="conteudo-aberto-texto" ng-bind-html="noticias[$index].Conteudo | formatText"></div>
+                                <div ht-if="!template.config.mesclado">
+                                    <div class="conteudo-aberto-texto" ht-bind-html="noticias[nivelIndex].Conteudo | formatText"></div>
                                 </div>
                             </div>
-                            <div ng-if="noticias[$index].IdMidia != 2">
-                                <div class="conteudo-aberto-texto" ng-bind-html="noticias[$index].Conteudo | formatText"></div>
+                            <div ht-if="noticias[nivelIndex].IdMidia != 2">
+                                <div class="conteudo-aberto-texto" ht-bind-html="noticias[nivelIndex].Conteudo | formatText"></div>
                             </div>
                         </td>
                     </tr>
-                    <tr ng-if="template['fonteRestrita' + noticias[$index].IdNoticia]">
+                    <tr ht-if="template['fonteRestrita' + noticias[nivelIndex].IdNoticia]">
                         <td class="noticia-texto">
                             <table cellspacing="0" cellpadding="0" width="100%">
                                 <tr>
-                                    <td style="padding-bottom: 20px;">
-                                        <span>{{noticias[$index].Conteudo | limitTo: 250}}...</span>
+                                    <td style="paddiht-bottom: 20px;">
+                                        <span>{{noticias[nivelIndex].Conteudo | limitTo: 250}}...</span>
                                         <a target="_blank" class="fonte-restrita-link"
-                                           ng-href="{{template.config.urlApi()}}/api/Url/Redirecionar?idProdutoMvc={{template.dados.Template.IdProdutoMvc}}&idNoticia={{noticias[$index].IdNoticia}}">Acessar notícia</a>
+                                           ht-href="{{template.config.urlApi()}}/api/Url/Redirecionar?idProdutoMvc={{template.dados.Template.IdProdutoMvc}}&idNoticia={{noticias[nivelIndex].IdNoticia}}">Acessar notícia</a>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="fonte-restrita-painel">
-                                        <em>{{template['fonteRestrita' + noticias[$index].IdNoticia].TextoRestricao}}</em>
+                                        <em>{{template['fonteRestrita' + noticias[nivelIndex].IdNoticia].TextoRestricao}}</em>
                                     </td>
                                 </tr>
                             </table>

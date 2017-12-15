@@ -1,8 +1,8 @@
 <table border="0" cellpadding="0" cellspacing="0" width="100%">
-    <tr ng-repeat="(ContainerIndex, container) in template.dados.Containers">
+    <tr ht-repeat="(ContainerIndex, container) in bookData.conteudo">
         <td class="container-canais">
             <table id="container-{{container.Id}}" cellpadding="0" cellspacing="0" width="100%">
-                <tr ng-repeat="(canaisIndex, canais) in container.ArvoreDeOrdenacao">
+                <tr ht-repeat="(canaisIndex, canais) in container.ArvoreDeOrdenacao">
                     <td>
                         <table cellpadding="0" cellspacing="0" width="100%">
                             <tr>
@@ -11,9 +11,8 @@
                                         <tr>
                                             <td>
                                                 <h2>
-                                                    <span ng-if="container.Opcoes['Canais numerados']">{{canaisIndex + 1}}.</span>
+                                                    <span ht-if="container.Opcoes['Canais numerados']">{{canaisIndex + 1}}.</span>
                                                     <a name="canal-{{canais.IdContainerNodo}}" id="canal-{{canais.IdContainerNodo}}">{{canais.NomeNivel}}</a>
-                                                    <span ng-if="container.Opcoes['Contador de Noticias']">({{template.countNoticiasByNodo(canais.IdContainerNodo)}})</span>
                                                 </h2>
                                             </td>
                                         </tr>
@@ -22,18 +21,18 @@
                             </tr>
                             <tr>
                                 <td class="canal-noticias">
-                                    <div ng-repeat="(nivelIndex, noticia) in (noticias = canais.items)" class="primeiro-nivel">
-                                        <noticias opcoes="{{container.Opcoes}}" noticia="{{noticia}}"
-                                                  ng-init="indexNumbers = (canaisIndex+1)+'.'+($index+1)+'.'"></noticias>
+                                    <div ht-repeat="(nivelIndex, noticia) in (noticias = canais.items)" class="primeiro-nivel">
+                                        <div ht-include="../noticias/noticias-umaPorLinha.html"></div>
+                                        <!-- <div ht-if="!(container.Opcoes['Modelo Conteúdo Aberto Texto'] || container.Opcoes['Modelo Conteúdo Aberto Mesclado'] || container.Opcoes['Uma noticia por linha'])" ht-include="../noticias/noticias-duasPorLinha.html"></div> -->
                                     </div>
                                 </td>
                             </tr>
-                            <tr ng-if="container.Opcoes['Leia mais']">
+                            <tr ht-if="container.Opcoes['Leia mais']">
                                 <td align="right">
                                     <table cellpadding="0" cellspacing="0">
                                         <tr>
                                             <td class="canal-noticias-leiamais">
-                                                <a ng-href="{{container.URLVejaMais}}" target="_blank">leia mais</a>
+                                                <a href="{{container.URLVejaMais}}" target="_blank">leia mais</a>
                                             </td>
                                         </tr>
                                     </table>
