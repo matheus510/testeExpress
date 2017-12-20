@@ -14,7 +14,7 @@
   },
   "license": "ISC",
   "dependencies": {
-    "angular-template": "git+https://github.com/matheus510/angular-template.git",
+    "angular-template": "https://github.com/matheus510/angular-template/tarball/master",
     "axios": "^0.17.1",
     "body-parser": "1.15.0",
     "co": "^4.6.0",

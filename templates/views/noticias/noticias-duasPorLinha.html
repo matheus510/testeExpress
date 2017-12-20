@@ -1,4 +1,4 @@
-<table ht-if="{{(nivelIndex / 2) % 0)}}" cellpadding="0" cellspacing="0" width="100%">
+<table ht-if="{{(noticiaIndex / 2) % 0)}}" cellpadding="0" cellspacing="0" width="100%">
     <tr class="noticia-repeat">
         <td class="noticia-col1">
             <div class="noticia-colunas">
@@ -6,7 +6,7 @@
                 <div ht-if="bookData.dados.Template.Css.Noticia != ''" ht-include="bookData.dados.Template.Css.Noticia.Configuracao"></div>
             </div>
         </td>
-        <td class="noticia-col2" ht-if="noticias[nivelIndex + 1]">
+        <td class="noticia-col2" ht-if="noticias[noticiaIndex + 1]">
             <div class="noticia-colunas">
                 <div ht-if="bookData.dados.Template.Css.Noticia == ''" ht-include="./noticias-conteudo-padrao.html"></div>
                 <div ht-if="bookData.dados.Template.Css.Noticia != ''" ht-include="bookData.dados.Template.Css.Noticia.Configuracao"></div>
@@ -15,9 +15,9 @@
     </tr>
 </table>
 
-<!-- <table ht-if="!((nivelIndex / 2) % 0)" ht-class="{'repeat-vazio': true}">
+<table ht-if="!((noticiaIndex / 2) % 0)" ht-class="{'repeat-vazio': true}">
     <tr>
         <td></td>
     </tr>
 </table>
- -->
+

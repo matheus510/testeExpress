@@ -1,97 +1,97 @@
-<table cellspacing="0" cellpadding="0" width="100%" ht-init="bookData.conteudo[0].ArvoreDeOrdenacao[0].items[0].UsarLinkOriginal = (bookData.dados.Template.Opcoes['Link original'] && (bookData.conteudo[0].ArvoreDeOrdenacao[0].items[0].IdMidia == 1))">
+<table cellspacing="0" cellpadding="0" width="100%">
     <tr>
-        <td ht-if="bookData.dados.Template.Opcoes['Icone de Midia']" width="45" align="left">
-            <img ht-if="!bookData.dados.Template.Opcoes['Template Boxnet']"
-                 ht-src="{{template.config.urlPage()}}/BookContents/Clientes/{{bookData.dados.Template.IdProdutoMvc}}/img/icone-midia-{{bookData.conteudo[0].ArvoreDeOrdenacao[0].items[0].IdMidia}}.png"
+        <td ht-if="container.Opcoes['Icone de Midia']" width="45" align="left">
+            <img ht-if="!dados.Template.Opcoes['Template Boxnet']"
+                 src="{{config.urlPage}}/BookContents/Clientes/{{dados.Template.IdProdutoMvc}}/img/icone-midia-{{noticia.IdMidia}}.png"
                  alt=""/>
-            <img ht-if="bookData.dados.Template.Opcoes['Template Boxnet']"
-                 ht-src="{{template.config.urlPage()}}/BookContents/Clientes/0/img/icone-midia-{{bookData.conteudo[0].ArvoreDeOrdenacao[0].items[0].IdMidia}}.png"
+            <img ht-if="dados.Template.Opcoes['Template Boxnet']"
+                 src="{{config.urlPage}}/BookContents/Clientes/0/img/icone-midia-{{noticia.IdMidia}}.png"
                  alt=""/>
         </td>
         <td>
             <table cellspacing="0" cellpadding="0" width="100%">
-                <tr ht-if="bookData.dados.Template.Opcoes['Avaliação'] && bookData.conteudo[0].ArvoreDeOrdenacao[0].items[0].Avaliacao != undefined">
+                <tr ht-if="container.Opcoes['Avaliação'] && noticia.Avaliacao != undefined">
                     <td class="noticia-avaliacao">
                         <table cellspacing="0" cellpadding="0">
                             <tr>
-                                <td class="noticia-avaliacao-cor" style="background: {{bookData.conteudo[0].ArvoreDeOrdenacao[0].items[0].Avaliacao.CorAvaliacao}}">
+                                <td class="noticia-avaliacao-cor" style="background: {{noticia.Avaliacao.CorAvaliacao}}">
                                 </td>
-                                <td><span>{{bookData.conteudo[0].ArvoreDeOrdenacao[0].items[0].Avaliacao.Descricao | uppercase}}</span></td>
+                                <td><span>{{noticia.Avaliacao.Descricao | uppercase}}</span></td>
                             </tr>
                         </table>
                     </td>
                 </tr>
                 <tr>
                     <td class="noticia-data">
-                        <span ht-if="!bookData.dados.Template.Opcoes['Icone de Midia']"><strong>{{bookData.conteudo[0].ArvoreDeOrdenacao[0].items[0].Midia}}</strong> - </span>
-                        <span>{{bookData.conteudo[0].ArvoreDeOrdenacao[0].items[0].DataFonte | date: 'fullDate'}}</span>
+                        <span ht-if="!container.Opcoes['Icone de Midia']"><strong>{{noticia.Midia}}</strong> - </span>
+                        <span>{{noticia.DataFonte | date: 'fullDate'}}</span>
                     </td>
                 </tr>
                 <tr>
                     <td class="noticia-titulo">
-                        <div ht-if="bookData.conteudo[0].ArvoreDeOrdenacao[0].items[0].IdMidia == 3 || bookData.conteudo[0].ArvoreDeOrdenacao[0].items[0].IdMidia == 4">
+                        <div ht-if="noticia.IdMidia == 3 || noticia.IdMidia == 4">
                             <span style="font-size: 11px;">
-                                <strong ht-if="bookData.dados.Template.Opcoes['Minutagem'] && bookData.conteudo[0].ArvoreDeOrdenacao[0].items[0].Duracao != undefined"> ({{bookData.conteudo[0].ArvoreDeOrdenacao[0].items[0].Duracao | secToHrs}})</strong></span>
+                                <strong ht-if="container.Opcoes['Minutagem'] && noticia.Duracao != undefined"> ({{noticia.Duracao | secToHrs}})</strong></span>
                         </div>
 
-                        <div ht-if="bookData.dados.Template.Opcoes['Ver em Navegadores Antigos']">
+                        <div ht-if="container.Opcoes['Ver em Navegadores Antigos']">
                             <a class="titulo" target="_blank"
-                               ht-if="!bookData.conteudo[0].ArvoreDeOrdenacao[0].items[0].UsarLinkOriginal"
-                               ht-href="{{template.config.urlPage()}}/Visualizar/?b={{template.config.idBookVersao}}&n={{bookData.conteudo[0].ArvoreDeOrdenacao[0].items[0].IdNoticia}}&p={{bookData.dados.IdProduto}}&pmvc={{bookData.dados.Template.IdProdutoMvc}}">
-                                {{bookData.conteudo[0].ArvoreDeOrdenacao[0].items[0].TituloNoticia}}
+                               ht-if="!noticia.UsarLinkOriginal"
+                               href="{{config.urlPage}}/Visualizar/?b={{config.idBookVersao}}&n={{noticia.IdNoticia}}&p={{dados.IdProduto}}&pmvc={{dados.Template.IdProdutoMvc}}">
+                                {{noticia.TituloNoticia}}
                             </a>
                             <a class="titulo" target="_blank"
-                               ht-if="bookData.conteudo[0].ArvoreDeOrdenacao[0].items[0].UsarLinkOriginal"
-                               ht-href="{{bookData.conteudo[0].ArvoreDeOrdenacao[0].items[0].UrlNoticia}}">
-                                {{bookData.conteudo[0].ArvoreDeOrdenacao[0].items[0].TituloNoticia}}
+                               ht-if="noticia.UsarLinkOriginal"
+                               href="{{noticia.UrlNoticia}}">
+                                {{noticia.TituloNoticia}}
                             </a>
                         </div>
-                        <div ht-if="!bookData.dados.Template.Opcoes['Ver em Navegadores Antigos']">
+                        <div ht-if="!container.Opcoes['Ver em Navegadores Antigos']">
                             <a class="titulo" target="_blank"
-                               ht-if="!bookData.conteudo[0].ArvoreDeOrdenacao[0].items[0].UsarLinkOriginal"
-                               ht-href="{{template.config.urlVis()}}/?idBook={{template.config.idBook}}&idNoticia={{bookData.conteudo[0].ArvoreDeOrdenacao[0].items[0].IdNoticia}}&idProdutoMvc={{bookData.dados.Template.IdProdutoMvc}}">
-                                {{bookData.conteudo[0].ArvoreDeOrdenacao[0].items[0].TituloNoticia}}
+                               ht-if="!noticia.UsarLinkOriginal"
+                               href="{{config.urlVis}}/?idBook={{config.idBook}}&idNoticia={{noticia.IdNoticia}}&idProdutoMvc={{dados.Template.IdProdutoMvc}}">
+                                {{noticia.TituloNoticia}}
                             </a>
                             <a class="titulo" target="_blank"
-                               ht-if="bookData.conteudo[0].ArvoreDeOrdenacao[0].items[0].UsarLinkOriginal"
-                               ht-href="{{bookData.conteudo[0].ArvoreDeOrdenacao[0].items[0].UrlNoticia}}">
-                                {{bookData.conteudo[0].ArvoreDeOrdenacao[0].items[0].TituloNoticia}}
+                               ht-if="noticia.UsarLinkOriginal"
+                               href="{{noticia.UrlNoticia}}">
+                                {{noticia.TituloNoticia}}
                             </a>
                         </div>
                     </td>
                 </tr>
                 <tr>
                     <td class="noticia-fonte">
-                        <span class="fonte"><!--  --></span>
-                        <a ht-href="{{template.config.urlVis()}}/?idNoticia={{bookData.conteudo[0].ArvoreDeOrdenacao[0].items[0].IdNoticia}}&idProdutoMvc={{bookData.dados.Template.IdProdutoMvc}}&personalizado=similares"
-                           target="_blank" ht-if="bookData.conteudo[0].ArvoreDeOrdenacao[0].items[0].TemNoticiasSimilares" class="noticia-fonte">
+                        <span class="fonte">{{noticia.Fonte | uppercase}}</span>
+                        <a href="{{config.urlVis}}/?idNoticia={{noticia.IdNoticia}}&idProdutoMvc={{dados.Template.IdProdutoMvc}}&personalizado=similares"
+                           target="_blank" ht-if="noticia.TemNoticiasSimilares" class="noticia-fonte">
                             <strong>[+]</strong>
                         </a>
 
-                        <span><strong ht-if="bookData.dados.Template.Opcoes['Classificação'] && bookData.conteudo[0].ArvoreDeOrdenacao[0].items[0].Abrangencia != undefined"> ({{bookData.conteudo[0].ArvoreDeOrdenacao[0].items[0].Abrangencia.Descricao}})</strong></span>
+                        <span><strong ht-if="container.Opcoes['Classificação'] && noticia.Abrangencia != undefined"> ({{noticia.Abrangencia.Descricao}})</strong></span>
                     </td>
                 </tr>
-                <tr ht-if="bookData.dados.Template.Opcoes['Noticias Relacionadas'] && bookData.conteudo[0].ArvoreDeOrdenacao[0].items[0].TemNoticiasRelacionadas">
+                <tr ht-if="container.Opcoes['Noticias Relacionadas'] && noticia.TemNoticiasRelacionadas">
                     <td class="noticia-texto">
-                        <div ht-repeat="relacionadas in bookData.conteudo[0].ArvoreDeOrdenacao[0].items[0].items">
-                            <a target="_blank" ht-href="{{template.config.urlVis()}}/?idBook={{template.config.idBook}}&idNoticia={{relacionadas.IdNoticia}}&idProdutoMvc={{bookData.dados.Template.IdProdutoMvc}}">
-                                <!--  --></a>
+                        <div ht-repeat="relacionadas in noticia.items">
+                            <a target="_blank" href="{{config.urlVis}}/?idBook={{config.idBook}}&idNoticia={{relacionadas.IdNoticia}}&idProdutoMvc={{dados.Template.IdProdutoMvc}}">
+                                {{relacionadas.Fonte | uppercase}}</a>
                         </div>
                     </td>
                 </tr>
-                <tr ht-if="bookData.dados.Template.Opcoes['Sinopse']">
+                <tr ht-if="container.Opcoes['Sinopse']">
                     <td class="noticia-texto">
-                        <span ht-if="bookData.conteudo[0].ArvoreDeOrdenacao[0].items[0].Sinopse" ht-bind-html="bookData.conteudo[0].ArvoreDeOrdenacao[0].items[0].Sinopse">
+                        <span ht-if="noticia.Sinopse" ht-bind-html="noticia.Sinopse">
                         </span>
-                        <span ht-if="bookData.dados.Template.Opcoes['Lead'] && (bookData.conteudo[0].ArvoreDeOrdenacao[0].items[0].Sinopse === null || bookData.conteudo[0].ArvoreDeOrdenacao[0].items[0].Sinopse === '')">
-                            {{bookData.conteudo[0].ArvoreDeOrdenacao[0].items[0].LeadNoticia}}
+                        <span ht-if="container.Opcoes['Lead'] && (noticia.Sinopse === null || noticia.Sinopse === '')">
+                            {{noticia.LeadNoticia}}
                         </span>
                     </td>
                 </tr>
-                <tr ht-if="bookData.dados.Template.Opcoes['Sinopse'] === undefined && bookData.dados.Template.Opcoes['Lead']">
+                <tr ht-if="container.Opcoes['Sinopse'] === undefined && container.Opcoes['Lead']">
                     <td class="noticia-texto">
                         <span>
-                            {{bookData.conteudo[0].ArvoreDeOrdenacao[0].items[0].LeadNoticia}}
+                            {{noticia.LeadNoticia}}
                         </span>
                     </td>
                 </tr>

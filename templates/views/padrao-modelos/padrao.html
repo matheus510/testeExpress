@@ -1,8 +1,8 @@
 <table border="0" cellpadding="0" cellspacing="0" width="100%">
-    <tr ht-repeat="(ContainerIndex, container) in bookData.dados">
+    <tr ht-repeat="(ContainerIndex, container) in conteudo">
         <td class="container-canais">
             <table id="container-{{container.Id}}" cellpadding="0" cellspacing="0" width="100%">
-                <tr ht-repeat="(canaisIndex, canais) in container.ArvoreDeOrdenacao">
+                <tr ht-repeat="(canalIndex, canal) in container.ArvoreDeOrdenacao">
                     <td>
                         <table cellpadding="0" cellspacing="0" width="100%">
                             <tr>
@@ -11,8 +11,8 @@
                                         <tr>
                                             <td>
                                                 <h2>
-                                                    <span ht-if="container.Opcoes['Canais numerados']">{{canaisIndex + 1}}.</span>
-                                                    <a name="canal-{{canais.IdContainerNodo}}" id="canal-{{canais.IdContainerNodo}}">{{canais.NomeNivel}}</a>
+                                                    <span ht-if="container.Opcoes['Canais numerados']">{{canalIndex + 1}}.</span>
+                                                    <a name="canal-{{canal.IdContainerNodo}}" id="canal-{{canal.IdContainerNodo}}">{{canal.NomeNivel}}</a>
                                                 </h2>
                                             </td>
                                         </tr>
@@ -21,9 +21,32 @@
                             </tr>
                             <tr>
                                 <td class="canal-noticias">
-                                    <div ht-repeat="(nivelIndex, noticia) in (noticias = canais.items)" class="primeiro-nivel">
-                                        <!-- <div ht-if="(container.Opcoes['Modelo Conteúdo Aberto Texto'] || container.Opcoes['Modelo Conteúdo Aberto Mesclado'] || container.Opcoes['Uma noticia por linha'])" ht-include="../noticias/noticias-umaPorLinha.html"></div> -->
-                                        <div ht-if="!(container.Opcoes['Modelo Conteúdo Aberto Texto'] || container.Opcoes['Modelo Conteúdo Aberto Mesclado'] || container.Opcoes['Uma noticia por linha'])" ht-include="../noticias/noticias-duasPorLinha.html"></div>
+                                    <div ht-repeat="(noticiaIndex, noticia) in noticias" class="primeiro-nivel">
+                                        <div ht-if="(container.Opcoes['Modelo Conteúdo Aberto Texto'] || container.Opcoes['Modelo Conteúdo Aberto Mesclado'])">
+                                            <!-- umaPorLinha template -->
+                                        </div>
+                                        <div ht-if="!(container.Opcoes['Modelo Conteúdo Aberto Texto'] || container.Opcoes['Modelo Conteúdo Aberto Mesclado'])">
+                                            <table ht-if="{{(noticiaIndex / 2) % 0) === 0}}" cellpadding="0" cellspacing="0" width="100%">
+                                                <tr class="noticia-repeat">
+                                                    <td class="noticia-col1">
+                                                        <div class="noticia-colunas">
+                                                            {{ noticias[noticiaIndex] }}
+                                                        </div>
+                                                    </td>
+                                                    <td class="noticia-col2">
+                                                        <div class="noticia-colunas">
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                            
+                                            <table ht-if="((noticiaIndex / 2) % 0) !== 0" ht-class="{'repeat-vazio': true}">
+                                                <tr>
+                                                    <td></td>
+                                                </tr>
+                                            </table>
+                                            
+                                        </div>
                                     </div>
                                 </td>
                             </tr>
